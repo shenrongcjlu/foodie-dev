@@ -1,0 +1,30 @@
+# Eclipse
+.metadata/
+.recommenders/
+RemoteSystemsTempFiles/
+Servers/
+**/target/
+**／.DS_Store
+**/.DS_Store
+**/.settings
+**/.classpath
+**/.project
+**/.externalToolBuilders
+**/.pmd
+**/.checkstyle
+**/*.bpmn2d
+settings.xml
+**/pom.xml.versionsBackup
+# idea
+.idea/
+**/*.iml
+
+# Others
+node_modules/
+**/MANIFEST.MF
+**/logs
+log.txt
+**/LOG_PATH_IS_UNDEFINED
+.flattened-pom.xml
+dispatch.db*
+/hsjry-asset-test/src/test/resources/http-client.env.json

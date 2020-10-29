@@ -3,15 +3,16 @@ package com.imooc.aspect;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
-import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Aspect;
 import org.springframework.stereotype.Component;
 
 @Slf4j
+@Aspect
 @Component
 public class ServiceLogAspect {
 
 
-    @Before("execution(* com.imooc.service.impl..*.*(..))")
+    @Around(value = "execution(* com.imooc.service.impl..*.*(..))")
     public Object recordTimeLog(ProceedingJoinPoint joinPoint) throws Throwable {
         log.info("=========开始执行{}.{}=========",
                 joinPoint.getTarget().getClass(),

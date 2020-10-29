@@ -9,6 +9,7 @@ import com.imooc.utils.JsonUtils;
 import com.imooc.utils.MD5Utils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,9 +17,10 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+@Slf4j
 @Api(value = "注册登录", tags = "用于注册登录的接口")
 @RestController
-@RequestMapping("passport")
+@RequestMapping("/passport")
 public class PassportController {
 
     @Autowired
@@ -43,7 +45,7 @@ public class PassportController {
                                   HttpServletRequest request,
                                   HttpServletResponse response) {
         Users user = userService.createUser(userBO);
-        CookieUtils.setCookie(request, response, "user", JsonUtils.objectToJson(user));
+        CookieUtils.setCookie(request, response, "user", JsonUtils.objectToJson(user), true);
         return IMOOCJSONResult.ok();
     }
 
@@ -59,7 +61,7 @@ public class PassportController {
         if (user == null) {
             return IMOOCJSONResult.errorMsg("用户名或密码错误");
         }
-        CookieUtils.setCookie(request, response, "user", JsonUtils.objectToJson(user));
+        CookieUtils.setCookie(request, response, "user", JsonUtils.objectToJson(user), true);
         return IMOOCJSONResult.ok(user);
     }
 }

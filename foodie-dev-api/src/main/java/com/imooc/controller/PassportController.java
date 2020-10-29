@@ -64,4 +64,14 @@ public class PassportController {
         CookieUtils.setCookie(request, response, "user", JsonUtils.objectToJson(user), true);
         return IMOOCJSONResult.ok(user);
     }
+
+    @ApiOperation(value = "用户注销", notes = "用户注销", httpMethod = "POST")
+    @PostMapping("/logout")
+    public IMOOCJSONResult logout(@RequestParam String userId,
+                                  HttpServletRequest request,
+                                  HttpServletResponse response) {
+        // 清除用户相关信息的cookie
+        CookieUtils.deleteCookie(request, response, "user");
+        return IMOOCJSONResult.ok();
+    }
 }

@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 public class ServiceLogAspect {
 
 
-    @Around(value = "execution(* com.imooc.service.impl..*.*(..))")
+    @Around("execution(* com.imooc.service.impl..*.*(..))")
     public Object recordTimeLog(ProceedingJoinPoint joinPoint) throws Throwable {
         log.info("=========开始执行{}.{}=========",
                 joinPoint.getTarget().getClass(),

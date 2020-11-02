@@ -45,7 +45,7 @@ public class UserServiceImpl implements UserService {
         }
         users.setBirthday(new Date());
         users.setNickname(userBO.getUsername());
-        users.setSex(Sex.MAN.type);
+        users.setSex(Sex.man.type);
         users.setCreatedTime(new Date());
         users.setUpdatedTime(new Date());
         users.setId(sid.nextShort());

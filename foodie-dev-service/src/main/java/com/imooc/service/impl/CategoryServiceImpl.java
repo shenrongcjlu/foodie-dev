@@ -5,11 +5,14 @@ import com.imooc.mapper.CategoryMapper;
 import com.imooc.pojo.Category;
 import com.imooc.service.CategoryService;
 import com.imooc.vo.CategoryVO;
+import com.imooc.vo.NewItemsVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
@@ -20,7 +23,7 @@ public class CategoryServiceImpl implements CategoryService {
     private CategoryCustomMapper categoryCustomMapper;
 
     @Override
-    public List<Category> queryAllRootLevelCar() {
+    public List<Category> queryAllRootLevelCat() {
 
         Example example = new Example(Category.class);
         Example.Criteria criteria = example.createCriteria();
@@ -31,5 +34,12 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public List<CategoryVO> getSubCatList(Integer rootCatId) {
         return categoryCustomMapper.getSubCatList(rootCatId);
+    }
+
+    @Override
+    public List<NewItemsVO> getSixNewItemsLazy(Integer rootCatId) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("rootCatId", rootCatId);
+        return categoryCustomMapper.getSixNewItemsLazy(map);
     }
 }

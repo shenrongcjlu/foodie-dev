@@ -31,9 +31,16 @@ public class IndexController {
         return IMOOCJSONResult.ok(carouselService.queryAll(YesOrNo.YES.type));
     }
 
+    @ApiOperation(value = "获取商品根分类", notes = "获取商品根分类", httpMethod = "GET")
+    @GetMapping("/cats")
+    public IMOOCJSONResult cats() {
+        return IMOOCJSONResult.ok(categoryService.queryAllRootLevelCat());
+    }
+
+
     @ApiOperation(value = "获取商品子分类", notes = "获取商品子分类", httpMethod = "GET")
     @GetMapping("/subCat/{rootCatId}")
-    public IMOOCJSONResult cats(
+    public IMOOCJSONResult subCat(
             @ApiParam(name = "rootCatId", value = "一级分类Id", required = true)
             @PathVariable Integer rootCatId) {
         if (rootCatId == null) {
@@ -42,5 +49,15 @@ public class IndexController {
         return IMOOCJSONResult.ok(categoryService.getSubCatList(rootCatId));
     }
 
+    @ApiOperation(value = "查询每个一级分类下最新的6条商品数据", notes = "查询每个一级分类下最新的6条商品数据", httpMethod = "GET")
+    @GetMapping("/sixNewItems/{rootCatId}")
+    public IMOOCJSONResult sixNewItems(
+            @ApiParam(name = "rootCatId", value = "一级分类Id", required = true)
+            @PathVariable Integer rootCatId) {
+        if (rootCatId == null) {
+            return IMOOCJSONResult.errorMsg("一级分类Id不能为空");
+        }
+        return IMOOCJSONResult.ok(categoryService.getSixNewItemsLazy(rootCatId));
+    }
 
 }

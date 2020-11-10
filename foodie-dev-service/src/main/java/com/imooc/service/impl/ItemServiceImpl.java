@@ -1,19 +1,23 @@
 package com.imooc.service.impl;
 
-import com.imooc.mapper.ItemsImgMapper;
-import com.imooc.mapper.ItemsMapper;
-import com.imooc.mapper.ItemsParamMapper;
-import com.imooc.mapper.ItemsSpecMapper;
-import com.imooc.pojo.Items;
-import com.imooc.pojo.ItemsImg;
-import com.imooc.pojo.ItemsParam;
-import com.imooc.pojo.ItemsSpec;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.imooc.mapper.*;
+import com.imooc.pojo.*;
 import com.imooc.service.ItemService;
+import com.imooc.utils.DesensitizationUtil;
+import com.imooc.utils.PagedGridResult;
+import com.imooc.vo.CommentLevelVO;
+import com.imooc.vo.ItemCommentVO;
+import com.sun.imageio.plugins.gif.GIFImageReader;
+import enums.CommentLevel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author shenrong
@@ -31,6 +35,10 @@ public class ItemServiceImpl implements ItemService {
     private ItemsSpecMapper itemsSpecMapper;
     @Autowired
     private ItemsParamMapper itemsParamMapper;
+    @Autowired
+    private ItemsCommentsMapper itemsCommentsMapper;
+    @Autowired
+    private ItemsCustomMapper itemsCustomMapper;
 
     @Override
     public Items queryItemById(String itemId) {
@@ -65,5 +73,52 @@ public class ItemServiceImpl implements ItemService {
         criteria.andEqualTo("itemId", itemId);
 
         return itemsParamMapper.selectOneByExample(example);
+    }
+
+    @Override
+    public CommentLevelVO queryCommentCounts(String itemId) {
+        Integer goodCounts = getCommentCounts(itemId, CommentLevel.GOOD.type);
+        Integer normalCounts = getCommentCounts(itemId, CommentLevel.NORMAL.type);
+        Integer badCounts = getCommentCounts(itemId, CommentLevel.BAD.type);
+        return CommentLevelVO.builder()
+                .goodCounts(goodCounts)
+                .normalCounts(normalCounts)
+                .badCounts(badCounts)
+                .totalCounts(goodCounts + normalCounts + badCounts)
+                .build();
+    }
+
+    @Override
+    public PagedGridResult queryPagedComments(String itemId, Integer level,
+                                                  Integer page, Integer pageSize) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("itemId", itemId);
+        map.put("level", level);
+
+        PageHelper.startPage(page, pageSize);
+        List<ItemCommentVO> result = itemsCustomMapper.queryItemComments(map);
+        result.forEach(item -> {
+            item.setNickname(DesensitizationUtil.commonDisplay(item.getNickname()));
+        });
+        return setPagedResult(page, result);
+    }
+
+    private PagedGridResult setPagedResult(Integer page, List<ItemCommentVO> result) {
+        PageInfo<?> pageInfo = new PageInfo<>(result);
+        PagedGridResult gridResult = new PagedGridResult();
+        gridResult.setPage(page);
+        gridResult.setRows(result);
+        gridResult.setTotal(pageInfo.getPages());
+        gridResult.setRecords(pageInfo.getTotal());
+        return gridResult;
+    }
+
+    private Integer getCommentCounts(String itemId, Integer level) {
+        ItemsComments condition = new ItemsComments();
+        condition.setItemId(itemId);
+        if (level != null) {
+            condition.setCommentLevel(level);
+        }
+        return itemsCommentsMapper.selectCount(condition);
     }
 }

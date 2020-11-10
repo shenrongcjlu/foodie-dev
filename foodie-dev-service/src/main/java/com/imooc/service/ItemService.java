@@ -4,6 +4,9 @@ import com.imooc.pojo.Items;
 import com.imooc.pojo.ItemsImg;
 import com.imooc.pojo.ItemsParam;
 import com.imooc.pojo.ItemsSpec;
+import com.imooc.utils.PagedGridResult;
+import com.imooc.vo.CommentLevelVO;
+import com.imooc.vo.ItemCommentVO;
 
 import java.util.List;
 
@@ -42,4 +45,19 @@ public interface ItemService {
      */
     ItemsParam queryItemParam(String itemId);
 
+    /**
+     * 查询商品评论数量
+     * @param itemId
+     * @return
+     */
+    CommentLevelVO queryCommentCounts(String itemId);
+
+    /**
+     * 根据商品Id和评价等级查询商品评价
+     * @param itemId
+     * @param level
+     * @return
+     */
+    PagedGridResult queryPagedComments(String itemId, Integer level,
+                                       Integer page, Integer pageSize);
 }

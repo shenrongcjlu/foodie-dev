@@ -9,8 +9,10 @@ import com.imooc.utils.DesensitizationUtil;
 import com.imooc.utils.PagedGridResult;
 import com.imooc.vo.CommentLevelVO;
 import com.imooc.vo.ItemCommentVO;
+import com.imooc.vo.SearchItemsVO;
 import com.sun.imageio.plugins.gif.GIFImageReader;
 import enums.CommentLevel;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
@@ -103,7 +105,29 @@ public class ItemServiceImpl implements ItemService {
         return setPagedResult(page, result);
     }
 
-    private PagedGridResult setPagedResult(Integer page, List<ItemCommentVO> result) {
+    @Override
+    public PagedGridResult searchItems(String keywords, String sort, Integer page, Integer pageSize) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("keywords", keywords);
+        map.put("sort", sort);
+        PageHelper.startPage(page, pageSize);
+        List<SearchItemsVO> result = itemsCustomMapper.searchItems(map);
+
+        return setPagedResult(page, result);
+    }
+
+    @Override
+    public PagedGridResult searchItemsByThirdCat(Integer catId, String sort, Integer page, Integer pageSize) {
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("catId", catId);
+        map.put("sort", sort);
+        PageHelper.startPage(page, pageSize);
+        List<SearchItemsVO> result = itemsCustomMapper.searchItemsByThirdCat(map);
+
+        return setPagedResult(page, result);    }
+
+    private PagedGridResult setPagedResult(Integer page, List<?> result) {
         PageInfo<?> pageInfo = new PageInfo<>(result);
         PagedGridResult gridResult = new PagedGridResult();
         gridResult.setPage(page);

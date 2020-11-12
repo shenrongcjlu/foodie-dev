@@ -89,4 +89,49 @@ public class ItemController extends BaseController {
         return IMOOCJSONResult.ok(itemService.queryPagedComments(itemId, level, page, pageSize));
     }
 
+    @ApiOperation(value = "搜索商品", notes = "搜索商品", httpMethod = "GET")
+    @GetMapping("/search")
+    public IMOOCJSONResult search(
+            @ApiParam(name = "keywords", value = "关键字", required = true)
+            @RequestParam String keywords,
+            @ApiParam(name = "sort", value = "排序", required = false)
+            @RequestParam String sort,
+            @ApiParam(name = "page", value = "查询下一页页数", required = false)
+            @RequestParam Integer page,
+            @ApiParam(name = "pageSize", value = "单页的数量", required = false)
+            @RequestParam Integer pageSize) {
+        if (StringUtils.isEmpty(keywords)) {
+            return IMOOCJSONResult.errorMsg("商品Id不能为空");
+        }
+        if (page == null) {
+            page = 1;
+        }
+        if (pageSize == null) {
+            pageSize = COMMENT_PAGE_SIZE;
+        }
+        return IMOOCJSONResult.ok(itemService.searchItems(keywords, sort, page, pageSize));
+    }
+
+    @ApiOperation(value = "根据三级分类搜索商品", notes = "根据三级分类搜索商品", httpMethod = "GET")
+    @GetMapping("/catItems")
+    public IMOOCJSONResult catItems(
+            @ApiParam(name = "catId", value = "三级分类Id", required = true)
+            @RequestParam Integer catId,
+            @ApiParam(name = "sort", value = "排序", required = false)
+            @RequestParam String sort,
+            @ApiParam(name = "page", value = "查询下一页页数", required = false)
+            @RequestParam Integer page,
+            @ApiParam(name = "pageSize", value = "单页的数量", required = false)
+            @RequestParam Integer pageSize) {
+        if (catId == null) {
+            return IMOOCJSONResult.errorMsg("三级分类Id不能为空");
+        }
+        if (page == null) {
+            page = 1;
+        }
+        if (pageSize == null) {
+            pageSize = COMMENT_PAGE_SIZE;
+        }
+        return IMOOCJSONResult.ok(itemService.searchItemsByThirdCat(catId, sort, page, pageSize));
+    }
 }

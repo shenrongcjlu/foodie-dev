@@ -10,11 +10,11 @@ import com.imooc.utils.PagedGridResult;
 import com.imooc.vo.CommentLevelVO;
 import com.imooc.vo.ItemCommentVO;
 import com.imooc.vo.SearchItemsVO;
-import com.sun.imageio.plugins.gif.GIFImageReader;
+import com.imooc.vo.ShopCatVO;
 import enums.CommentLevel;
-import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import tk.mybatis.mapper.entity.Example;
 
 import java.util.HashMap;
@@ -126,6 +126,12 @@ public class ItemServiceImpl implements ItemService {
         List<SearchItemsVO> result = itemsCustomMapper.searchItemsByThirdCat(map);
 
         return setPagedResult(page, result);    }
+
+    @Override
+    public List<ShopCatVO> queryItemsBySpecIds(String specIds) {
+        List<String> list = CollectionUtils.arrayToList(specIds.split(","));
+        return itemsCustomMapper.queryItemsBySpecIds(list);
+    }
 
     private PagedGridResult setPagedResult(Integer page, List<?> result) {
         PageInfo<?> pageInfo = new PageInfo<>(result);

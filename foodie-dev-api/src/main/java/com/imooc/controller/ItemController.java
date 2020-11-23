@@ -16,6 +16,7 @@ import org.omg.CORBA.BAD_CONTEXT;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 /**
@@ -133,5 +134,14 @@ public class ItemController extends BaseController {
             pageSize = COMMENT_PAGE_SIZE;
         }
         return IMOOCJSONResult.ok(itemService.searchItemsByThirdCat(catId, sort, page, pageSize));
+    }
+
+    @ApiOperation(value = "根据商品规格ids查询最新的商品数据", notes = "根据商品规格ids查询最新的商品数据", httpMethod = "GET")
+    @GetMapping("/refresh")
+    public IMOOCJSONResult refresh(
+            @ApiParam(name = "itemSpecIds", value = "拼接的规格id列表", required = true)
+            @NotBlank(message = "规格id列表不能为空")
+            @RequestParam String itemSpecIds) {
+        return IMOOCJSONResult.ok(itemService.queryItemsBySpecIds(itemSpecIds));
     }
 }

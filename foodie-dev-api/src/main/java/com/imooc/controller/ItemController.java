@@ -144,4 +144,6 @@ public class ItemController extends BaseController {
             @RequestParam String itemSpecIds) {
         return IMOOCJSONResult.ok(itemService.queryItemsBySpecIds(itemSpecIds));
     }
+
+
 }

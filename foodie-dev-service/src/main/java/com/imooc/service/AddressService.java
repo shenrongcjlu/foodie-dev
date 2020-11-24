@@ -1,5 +1,6 @@
 package com.imooc.service;
 
+import com.imooc.dto.AddressDto;
 import com.imooc.pojo.UserAddress;
 
 import java.util.List;
@@ -19,4 +20,29 @@ public interface AddressService {
      */
     List<UserAddress> queryAll(String userId);
 
+    /**
+     * 新增用户收货地址
+     * @param addressDto
+     */
+    void addUserAddress(AddressDto addressDto);
+
+    /**
+     * 修改用户收获地址
+     * @param addressDto
+     */
+    void modifyUserAddress(AddressDto addressDto);
+
+    /**
+     * 删除地址
+     * @param addressId
+     * @param userId
+     */
+    void deleteAddress(String addressId, String userId);
+
+    /**
+     * 设置默认的地址
+     * @param userId
+     * @param addressId
+     */
+    void setDefaultAddress(String userId, String addressId);
 }

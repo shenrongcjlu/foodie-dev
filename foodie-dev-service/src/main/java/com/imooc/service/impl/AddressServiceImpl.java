@@ -95,4 +95,12 @@ public class AddressServiceImpl implements AddressService {
         newAddress.setIsDefault(YesOrNo.YES.type);
         userAddressMapper.updateByPrimaryKeySelective(newAddress);
     }
+
+    @Override
+    public UserAddress queryByUserIdAndAddressId(String userId, String addressId) {
+        UserAddress userAddress = new UserAddress();
+        userAddress.setId(addressId);
+        userAddress.setUserId(userId);
+        return userAddressMapper.selectOne(userAddress);
+    }
 }

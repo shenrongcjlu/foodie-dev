@@ -45,4 +45,12 @@ public interface AddressService {
      * @param addressId
      */
     void setDefaultAddress(String userId, String addressId);
+
+    /**
+     * 根据用户Id和地址Id查询用户地址
+     * @param userId
+     * @param addressId
+     * @return
+     */
+    UserAddress queryByUserIdAndAddressId(String userId, String addressId);
 }

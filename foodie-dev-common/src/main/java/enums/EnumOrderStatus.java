@@ -3,7 +3,7 @@ package enums;
 /**
  * @Description: 订单状态 枚举
  */
-public enum OrderStatusEnum {
+public enum EnumOrderStatus {
 
 	WAIT_PAY(10, "待付款"),
 	WAIT_DELIVER(20, "已付款，待发货"),
@@ -14,7 +14,7 @@ public enum OrderStatusEnum {
 	public final Integer type;
 	public final String value;
 
-	OrderStatusEnum(Integer type, String value){
+	EnumOrderStatus(Integer type, String value){
 		this.type = type;
 		this.value = value;
 	}

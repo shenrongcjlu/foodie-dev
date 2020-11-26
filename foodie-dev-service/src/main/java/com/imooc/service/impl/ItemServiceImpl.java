@@ -12,8 +12,10 @@ import com.imooc.vo.ItemCommentVO;
 import com.imooc.vo.SearchItemsVO;
 import com.imooc.vo.ShopCatVO;
 import enums.CommentLevel;
+import enums.YesOrNo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import tk.mybatis.mapper.entity.Example;
 
@@ -131,6 +133,29 @@ public class ItemServiceImpl implements ItemService {
     public List<ShopCatVO> queryItemsBySpecIds(String specIds) {
         List<String> list = CollectionUtils.arrayToList(specIds.split(","));
         return itemsCustomMapper.queryItemsBySpecIds(list);
+    }
+
+    @Override
+    public ItemsSpec queryItemSpecById(String itemSpecId) {
+        return itemsSpecMapper.selectByPrimaryKey(itemSpecId);
+    }
+
+    @Override
+    public String queryItemMainImg(String itemId) {
+        ItemsImg itemsImg = new ItemsImg();
+        itemsImg.setItemId(itemId);
+        itemsImg.setIsMain(YesOrNo.YES.type);
+        ItemsImg result = itemsImgMapper.selectOne(itemsImg);
+        return result == null ? "" : result.getUrl();
+    }
+
+    @Transactional
+    @Override
+    public void decreaseItemSpecStock(String itemSpecId, int buyCounts) {
+        int result = itemsCustomMapper.decreaseItemSpecStock(itemSpecId, buyCounts);
+        if (result == 0) {
+            throw new RuntimeException("创建订单失败，库存不足");
+        }
     }
 
     private PagedGridResult setPagedResult(Integer page, List<?> result) {

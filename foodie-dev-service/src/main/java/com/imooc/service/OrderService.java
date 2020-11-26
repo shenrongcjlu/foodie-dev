@@ -12,7 +12,8 @@ public interface OrderService {
     /**
      * 提交订单方法
      * @param submitOrderDto
+     * @return
      */
-    void createOrder(SubmitOrderDto submitOrderDto);
+    String createOrder(SubmitOrderDto submitOrderDto);
 
 }

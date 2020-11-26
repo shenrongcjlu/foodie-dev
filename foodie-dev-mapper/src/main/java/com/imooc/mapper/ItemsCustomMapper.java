@@ -4,6 +4,7 @@ import com.imooc.vo.ItemCommentVO;
 import com.imooc.vo.SearchItemsVO;
 import com.imooc.vo.ShopCatVO;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 import java.util.Map;
@@ -42,4 +43,12 @@ public interface ItemsCustomMapper {
      * @return
      */
     List<ShopCatVO> queryItemsBySpecIds(@Param("paramsList") List<String> list);
+
+    /**
+     * 扣除商品库存
+     * @param specId
+     * @param buyCounts
+     * @return
+     */
+    int decreaseItemSpecStock(@Param("specId") String specId, @Param("buyCounts") int buyCounts);
 }

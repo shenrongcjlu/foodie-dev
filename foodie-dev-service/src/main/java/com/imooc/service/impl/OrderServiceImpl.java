@@ -1,5 +1,6 @@
 package com.imooc.service.impl;
 
+import com.imooc.dto.MerchantOrdersDTO;
 import com.imooc.dto.SubmitOrderDto;
 import com.imooc.mapper.OrderItemsMapper;
 import com.imooc.mapper.OrderStatusMapper;
@@ -8,6 +9,7 @@ import com.imooc.pojo.*;
 import com.imooc.service.AddressService;
 import com.imooc.service.ItemService;
 import com.imooc.service.OrderService;
+import com.imooc.vo.OrderVO;
 import enums.EnumOrderStatus;
 import enums.YesOrNo;
 import org.n3r.idworker.Sid;
@@ -41,7 +43,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Transactional
     @Override
-    public String createOrder(SubmitOrderDto submitOrderDto) {
+    public OrderVO createOrder(SubmitOrderDto submitOrderDto) {
 
         UserAddress userAddress = addressService.queryByUserIdAndAddressId(submitOrderDto.getUserId(), submitOrderDto.getAddressId());
 
@@ -67,7 +69,7 @@ public class OrderServiceImpl implements OrderService {
         String[] itemSpecIds = submitOrderDto.getItemSpecIds().split(",");
         int totalAmount = 0;
         int realPayAmount = 0;
-        int buyCounts = 0;
+        int buyCounts = 1;
         for (String itemSpecId : itemSpecIds) {
             // TODO 整合redis后商品数量从redis中取
 
@@ -107,6 +109,27 @@ public class OrderServiceImpl implements OrderService {
         orderStatus.setCreatedTime(new Date());
         orderStatusMapper.insertSelective(orderStatus);
 
-        return orders.getId();
+        // 7. 构建商户订单
+        MerchantOrdersDTO merchantOrdersDTO = new MerchantOrdersDTO();
+        merchantOrdersDTO.setMerchantOrderId(orders.getId());
+        merchantOrdersDTO.setMerchantUserId(submitOrderDto.getUserId());
+        merchantOrdersDTO.setAmount(realPayAmount + orders.getPostAmount());
+        merchantOrdersDTO.setPayMethod(orders.getPayMethod());
+
+        OrderVO orderVO = new OrderVO();
+        orderVO.setOrderId(orders.getId());
+        orderVO.setMerchantOrdersDTO(merchantOrdersDTO);
+
+        return orderVO;
+    }
+
+    @Override
+    public void updateOrderStatus(String merchantOrderId, EnumOrderStatus status) {
+        OrderStatus orderStatus = new OrderStatus();
+        orderStatus.setOrderStatus(status.type);
+        orderStatus.setOrderId(merchantOrderId);
+        orderStatus.setPayTime(new Date());
+
+        orderStatusMapper.updateByPrimaryKeySelective(orderStatus);
     }
 }

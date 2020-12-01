@@ -132,4 +132,9 @@ public class OrderServiceImpl implements OrderService {
 
         orderStatusMapper.updateByPrimaryKeySelective(orderStatus);
     }
+
+    @Override
+    public OrderStatus getOrderStatusInfo(String orderId) {
+        return orderStatusMapper.selectByPrimaryKey(orderId);
+    }
 }

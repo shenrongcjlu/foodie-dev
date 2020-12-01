@@ -1,6 +1,7 @@
 package com.imooc.service;
 
 import com.imooc.dto.SubmitOrderDto;
+import com.imooc.pojo.OrderStatus;
 import com.imooc.vo.OrderVO;
 import enums.EnumOrderStatus;
 
@@ -24,4 +25,10 @@ public interface OrderService {
      * @param status
      */
     void updateOrderStatus(String merchantOrderId, EnumOrderStatus status);
+
+    /**
+     * 查询订单装状态
+     * @param orderId
+     */
+    OrderStatus getOrderStatusInfo(String orderId);
 }

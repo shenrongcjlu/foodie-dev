@@ -58,6 +58,8 @@ public class OrderController extends BaseController {
         // 3.调用支付中心发送当前订单
         MerchantOrdersDTO merchantOrdersDTO = order.getMerchantOrdersDTO();
         merchantOrdersDTO.setReturnUrl(payReturnURL);
+        // 方便测试，所有金额设置成一分钱
+        merchantOrdersDTO.setAmount(1);
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -79,6 +81,11 @@ public class OrderController extends BaseController {
     public Integer notifyMerchantOrderPaid(String merchantOrderId) {
         orderService.updateOrderStatus(merchantOrderId, EnumOrderStatus.WAIT_DELIVER);
         return HttpStatus.OK.value();
+    }
+
+    @PostMapping("/getPaidOrderInfo")
+    public IMOOCJSONResult getPaidOrderInfo(String orderId) {
+        return IMOOCJSONResult.ok(orderService.getOrderStatusInfo(orderId));
     }
 
 }

@@ -31,4 +31,9 @@ public interface OrderService {
      * @param orderId
      */
     OrderStatus getOrderStatusInfo(String orderId);
+
+    /**
+     * 关闭订单
+     */
+    void closeOrder();
 }

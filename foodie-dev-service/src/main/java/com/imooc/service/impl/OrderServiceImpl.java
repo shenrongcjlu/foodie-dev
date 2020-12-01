@@ -9,6 +9,7 @@ import com.imooc.pojo.*;
 import com.imooc.service.AddressService;
 import com.imooc.service.ItemService;
 import com.imooc.service.OrderService;
+import com.imooc.utils.DateUtil;
 import com.imooc.vo.OrderVO;
 import enums.EnumOrderStatus;
 import enums.YesOrNo;
@@ -16,9 +17,11 @@ import org.n3r.idworker.Sid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author shenrong
@@ -136,5 +139,25 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public OrderStatus getOrderStatusInfo(String orderId) {
         return orderStatusMapper.selectByPrimaryKey(orderId);
+    }
+
+    @Override
+    public void closeOrder() {
+        // 查询未支付订单，时间是否超过1天，超时则关闭交易
+        OrderStatus query = new OrderStatus();
+        query.setOrderStatus(EnumOrderStatus.WAIT_PAY.type);
+        List<OrderStatus> result = orderStatusMapper.select(query);
+        if (CollectionUtils.isEmpty(result)) {
+            return;
+        }
+        for (OrderStatus orderStatus : result) {
+            Date createdTime = orderStatus.getCreatedTime();
+            int days = DateUtil.daysBetween(createdTime, new Date());
+            if (days >= 1) {
+                orderStatus.setOrderStatus(EnumOrderStatus.CLOSE.type);
+                orderStatus.setCloseTime(new Date());
+                orderStatusMapper.updateByPrimaryKeySelective(orderStatus);
+            }
+        }
     }
 }

@@ -1,5 +1,6 @@
 package com.imooc.service.center;
 
+import com.imooc.center.dto.CenterUserDto;
 import com.imooc.pojo.Users;
 
 /**
@@ -16,4 +17,11 @@ public interface CenterUserService {
      */
     Users getUserInfo(String userId);
 
+    /**
+     * 更新用户信息
+     * @param userId
+     * @param centerUserDto
+     * @return
+     */
+    Users updateUserInfo(String userId, CenterUserDto centerUserDto);
 }

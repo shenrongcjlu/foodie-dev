@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService {
         users.setCreatedTime(new Date());
         users.setUpdatedTime(new Date());
         users.setId(sid.nextShort());
-        users.setFace("");
+        users.setFace("face.jpg");
 
         usersMapper.insert(users);
         return users;

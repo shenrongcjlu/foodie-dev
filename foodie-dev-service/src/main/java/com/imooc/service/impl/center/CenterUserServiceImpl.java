@@ -51,13 +51,14 @@ public class CenterUserServiceImpl implements CenterUserService {
     }
 
     @Override
-    public void uploadFace(String userId, MultipartFile file, String imageUserFaceLocation) {
+    public String uploadFace(String userId, MultipartFile file, String imageUserFaceLocation) {
         // 用户上传文件路径加上userId的前缀
         String uploadPathPrefix = File.separator + userId;
 
         // 开始文件上传
         String fileName = file.getOriginalFilename();
         FileOutputStream fileOutputStream = null;
+        String newFileName = "";
         if (StringUtils.isNotBlank(fileName)) {
             try {
                 // 分割文件名
@@ -65,13 +66,13 @@ public class CenterUserServiceImpl implements CenterUserService {
                 // 获取文件后缀名
                 String suffix = fileNameArr[fileNameArr.length - 1];
                 // 文件名重组，覆盖式上传（替换掉原有的图片）
-                String newFileName = "face-" + userId + "." + suffix;
+                newFileName = "face-" + userId + "." + suffix;
                 // 上传头像最终保存的位置
-                String finalFilePath = imageUserFaceLocation + uploadPathPrefix + File.separator + newFileName;
+                String  finalFilePath = imageUserFaceLocation + uploadPathPrefix + File.separator + newFileName;
 
                 File outFile = new File(finalFilePath);
                 // 如果父目录不存在，创建父目录
-                if (outFile.getParentFile() == null) {
+                if (outFile.getParentFile() != null) {
                     outFile.getParentFile().mkdirs();
                 }
 
@@ -85,5 +86,17 @@ public class CenterUserServiceImpl implements CenterUserService {
                 IOUtils.closeQuietly(fileOutputStream);
             }
         }
+        return newFileName;
+    }
+
+    @Transactional
+    @Override
+    public void updateUserFace(String userId, String faceUrl) {
+        Users users = new Users();
+        users.setId(userId);
+        users.setFace(faceUrl);
+        users.setUpdatedTime(new Date());
+
+        usersMapper.updateByPrimaryKeySelective(users);
     }
 }

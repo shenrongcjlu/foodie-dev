@@ -6,6 +6,7 @@ import com.imooc.pojo.Users;
 import com.imooc.resouce.FileUploadProperties;
 import com.imooc.service.center.CenterUserService;
 import com.imooc.utils.CookieUtils;
+import com.imooc.utils.DateUtil;
 import com.imooc.utils.IMOOCJSONResult;
 import com.imooc.utils.JsonUtils;
 import io.swagger.annotations.Api;
@@ -64,11 +65,13 @@ public class CenterUserController extends BaseController {
             HttpServletRequest request,
             HttpServletResponse response) {
 
-        centerUserService.uploadFace(userId, file, fileUploadProperties.getImageUserFaceLocation());
-
-
-
-        return IMOOCJSONResult.ok();
+        String fileName = centerUserService.uploadFace(userId, file, fileUploadProperties.getImageUserFaceLocation());
+        String faceUrl = fileUploadProperties.getImageServerUrl()
+                + "/" + userId
+                + "/" + fileName
+                + "?t=" + DateUtil.getCurrentDateString(DateUtil.DATETIME_PATTERN);
+        centerUserService.updateUserFace(userId, faceUrl);
+        return IMOOCJSONResult.ok(faceUrl);
     }
 
 }

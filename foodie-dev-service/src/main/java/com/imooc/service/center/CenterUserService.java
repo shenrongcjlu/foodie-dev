@@ -31,6 +31,14 @@ public interface CenterUserService {
      * @param userId
      * @param file
      * @param imageUserFaceLocation
+     * @return
      */
-    void uploadFace(String userId, MultipartFile file, String imageUserFaceLocation);
+    String uploadFace(String userId, MultipartFile file, String imageUserFaceLocation);
+
+    /**
+     * 更新用户头像
+     * @param userId
+     * @param faceUrl
+     */
+    void updateUserFace(String userId, String faceUrl);
 }

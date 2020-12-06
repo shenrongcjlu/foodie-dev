@@ -2,6 +2,7 @@ package com.imooc.service.center;
 
 import com.imooc.center.dto.CenterUserDto;
 import com.imooc.pojo.Users;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @author shenrong
@@ -24,4 +25,12 @@ public interface CenterUserService {
      * @return
      */
     Users updateUserInfo(String userId, CenterUserDto centerUserDto);
+
+    /**
+     * 上传用户头像
+     * @param userId
+     * @param file
+     * @param imageUserFaceLocation
+     */
+    void uploadFace(String userId, MultipartFile file, String imageUserFaceLocation);
 }

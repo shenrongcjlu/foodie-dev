@@ -3,9 +3,12 @@ package com.imooc.service.impl.center;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.imooc.mapper.CustomOrderMapper;
+import com.imooc.mapper.OrderStatusMapper;
+import com.imooc.pojo.OrderStatus;
 import com.imooc.service.center.MyOrderService;
 import com.imooc.utils.PagedGridResult;
 import com.imooc.vo.MyOrdersVO;
+import enums.EnumOrderStatus;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +28,8 @@ public class MyOrderServiceImpl implements MyOrderService {
 
     @Autowired
     private CustomOrderMapper customOrderMapper;
+    @Autowired
+    private OrderStatusMapper orderStatusMapper;
 
     @Override
     public PagedGridResult listMyOrders(String userId, Integer orderStatus, Integer page, Integer pageSize) {
@@ -38,6 +43,15 @@ public class MyOrderServiceImpl implements MyOrderService {
         PageHelper.startPage(page, pageSize);
 
         return setPagedResult(page, myOrdersVOS);
+    }
+
+    @Override
+    public void updateDeliverOrderStatus(String orderId) {
+        OrderStatus orderStatus = new OrderStatus();
+        orderStatus.setOrderId(orderId);
+        orderStatus.setOrderStatus(EnumOrderStatus.WAIT_RECEIVE.type);
+
+        orderStatusMapper.updateByPrimaryKeySelective(orderStatus);
     }
 
     private PagedGridResult setPagedResult(Integer page, List<?> result) {

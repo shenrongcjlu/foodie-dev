@@ -8,6 +8,8 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.NotBlank;
+
 /**
  * @author shenrong
  * @version 1.0
@@ -30,6 +32,14 @@ public class CenterOrderController {
             @RequestParam Integer pageSize
     ) {
         return IMOOCJSONResult.ok(myOrderService.listMyOrders(userId, orderStatus, page, pageSize));
+    }
+
+    @GetMapping("/deliver")
+    public IMOOCJSONResult deliver(
+            @NotBlank(message = "订单Id不能为空")
+            @RequestParam String orderId) {
+        myOrderService.updateDeliverOrderStatus(orderId);
+        return IMOOCJSONResult.ok();
     }
 
 }

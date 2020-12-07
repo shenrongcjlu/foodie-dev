@@ -23,4 +23,10 @@ public interface MyOrderService {
                                  Integer pageSize
     );
 
+    /**
+     * 修改订单状态
+     * @param orderId
+     */
+    void updateDeliverOrderStatus(String orderId);
+
 }

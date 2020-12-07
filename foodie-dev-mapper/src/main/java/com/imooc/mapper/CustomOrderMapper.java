@@ -1,6 +1,7 @@
 package com.imooc.mapper;
 
 import com.imooc.vo.MyOrdersVO;
+import com.imooc.vo.MySubOrderItemVO;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -13,6 +14,8 @@ import java.util.Map;
  */
 public interface CustomOrderMapper {
 
-    public List<MyOrdersVO> listMyOrders(@Param("paramsMap") Map<String, Object> map);
+    List<MyOrdersVO> listMyOrders(@Param("paramsMap") Map<String, Object> map);
+
+    List<MySubOrderItemVO> getSubItems(@Param("orderId") String orderId);
 
 }

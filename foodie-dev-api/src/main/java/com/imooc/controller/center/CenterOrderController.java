@@ -61,4 +61,20 @@ public class CenterOrderController {
         myOrderService.deleteOrder(orderId, userId);
         return IMOOCJSONResult.ok();
     }
+
+    @PostMapping("/statusCounts")
+    public IMOOCJSONResult statusCounts(
+            @NotBlank(message = "用户Id不能为空")
+            @RequestParam String userId){
+        return IMOOCJSONResult.ok(myOrderService.getMyOrderStatusCounts(userId));
+    }
+
+    @PostMapping("/trend")
+    public IMOOCJSONResult trend(
+            @NotBlank(message = "用户Id不能为空")
+            @RequestParam String userId,
+            @RequestParam Integer page,
+            @RequestParam Integer pageSize){
+        return IMOOCJSONResult.ok(myOrderService.getMyOrderTrend(userId, page, pageSize));
+    }
 }

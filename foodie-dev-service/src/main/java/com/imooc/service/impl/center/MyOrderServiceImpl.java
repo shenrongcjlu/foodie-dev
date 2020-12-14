@@ -10,6 +10,7 @@ import com.imooc.pojo.Orders;
 import com.imooc.service.center.MyOrderService;
 import com.imooc.utils.PagedGridResult;
 import com.imooc.vo.MyOrdersVO;
+import com.imooc.vo.OrderStatusCountsVO;
 import enums.EnumOrderStatus;
 import enums.YesOrNo;
 import lombok.extern.slf4j.Slf4j;
@@ -87,6 +88,41 @@ public class MyOrderServiceImpl implements MyOrderService {
         orders.setId(orderId);
         orders.setUserId(userId);
         ordersMapper.updateByPrimaryKeySelective(orders);
+    }
+
+    @Override
+    public OrderStatusCountsVO getMyOrderStatusCounts(String userId) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("userId", userId);
+
+        map.put("orderStatus", EnumOrderStatus.WAIT_PAY.type);
+        int waitPayCounts = customOrderMapper.getMyOrderStatusCounts(map);
+
+        map.put("orderStatus", EnumOrderStatus.WAIT_DELIVER.type);
+        int waitDeliverCounts = customOrderMapper.getMyOrderStatusCounts(map);
+
+        map.put("orderStatus", EnumOrderStatus.WAIT_RECEIVE.type);
+        int waitReceiveCounts = customOrderMapper.getMyOrderStatusCounts(map);
+
+        map.put("orderStatus", EnumOrderStatus.SUCCESS.type);
+        map.put("isComment", YesOrNo.NO.type);
+        int waitCommentCounts = customOrderMapper.getMyOrderStatusCounts(map);
+
+        return new OrderStatusCountsVO(waitPayCounts,
+                waitDeliverCounts,
+                waitReceiveCounts,
+                waitCommentCounts);
+    }
+
+    @Override
+    public PagedGridResult getMyOrderTrend(String userId, Integer page, Integer pageSize) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("userId", userId);
+
+        List<OrderStatus> myOrderTrend = customOrderMapper.getMyOrderTrend(map);
+        PageHelper.startPage(page, pageSize);
+
+        return setPagedResult(page, myOrderTrend);
     }
 
     private PagedGridResult setPagedResult(Integer page, List<?> result) {

@@ -1,14 +1,15 @@
 package com.imooc.controller.center;
 
+import com.imooc.dto.OrderItemCommentDto;
 import com.imooc.service.center.CenterCommentService;
 import com.imooc.utils.IMOOCJSONResult;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.constraints.NotNull;
+import java.util.List;
 
 /**
  * @author shenrong
@@ -28,6 +29,22 @@ public class CenterCommentController {
     public IMOOCJSONResult pending(@RequestParam String userId,
                                    @RequestParam String orderId) {
         return IMOOCJSONResult.ok(centerCommentService.queryPendingOrderItems(orderId));
+    }
+
+    @PostMapping("/saveList")
+    public IMOOCJSONResult saveList(@RequestParam String userId,
+                                    @RequestParam String orderId,
+                                    @NotNull
+                                    @RequestBody List<OrderItemCommentDto> commentList) {
+        centerCommentService.saveComment(userId, orderId, commentList);
+        return IMOOCJSONResult.ok();
+    }
+
+    @PostMapping("/query")
+    public IMOOCJSONResult query(@RequestParam String userId,
+                                 @RequestParam Integer page,
+                                 @RequestParam Integer pageSize) {
+        return IMOOCJSONResult.ok(centerCommentService.queryMyComments(userId, page, pageSize));
     }
 
 }

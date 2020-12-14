@@ -42,4 +42,23 @@ public class CenterOrderController {
         return IMOOCJSONResult.ok();
     }
 
+    @PostMapping("/confirmReceive")
+    public IMOOCJSONResult confirmReceive(
+            @NotBlank(message = "订单Id不能为空")
+            @RequestParam String orderId,
+            @NotBlank(message = "用户Id不能为空")
+            @RequestParam String userId) {
+        myOrderService.confirmReceive(orderId, userId);
+        return IMOOCJSONResult.ok();
+    }
+
+    @PostMapping("/delete")
+    public IMOOCJSONResult delete(
+            @NotBlank(message = "订单Id不能为空")
+            @RequestParam String orderId,
+            @NotBlank(message = "用户Id不能为空")
+            @RequestParam String userId) {
+        myOrderService.deleteOrder(orderId, userId);
+        return IMOOCJSONResult.ok();
+    }
 }

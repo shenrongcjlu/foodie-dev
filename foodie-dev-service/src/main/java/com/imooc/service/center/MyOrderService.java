@@ -29,4 +29,17 @@ public interface MyOrderService {
      */
     void updateDeliverOrderStatus(String orderId);
 
+    /**
+     * 确认收货
+     * @param orderId
+     * @param userId
+     */
+    void confirmReceive(String orderId, String userId);
+
+    /**
+     * 删除订单
+     * @param orderId
+     * @param userId
+     */
+    void deleteOrder(String orderId, String userId);
 }

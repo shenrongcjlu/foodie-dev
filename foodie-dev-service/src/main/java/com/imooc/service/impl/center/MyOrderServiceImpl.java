@@ -4,15 +4,20 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.imooc.mapper.CustomOrderMapper;
 import com.imooc.mapper.OrderStatusMapper;
+import com.imooc.mapper.OrdersMapper;
 import com.imooc.pojo.OrderStatus;
+import com.imooc.pojo.Orders;
 import com.imooc.service.center.MyOrderService;
 import com.imooc.utils.PagedGridResult;
 import com.imooc.vo.MyOrdersVO;
 import enums.EnumOrderStatus;
+import enums.YesOrNo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,6 +35,8 @@ public class MyOrderServiceImpl implements MyOrderService {
     private CustomOrderMapper customOrderMapper;
     @Autowired
     private OrderStatusMapper orderStatusMapper;
+    @Autowired
+    private OrdersMapper ordersMapper;
 
     @Override
     public PagedGridResult listMyOrders(String userId, Integer orderStatus, Integer page, Integer pageSize) {
@@ -45,6 +52,7 @@ public class MyOrderServiceImpl implements MyOrderService {
         return setPagedResult(page, myOrdersVOS);
     }
 
+    @Transactional
     @Override
     public void updateDeliverOrderStatus(String orderId) {
         OrderStatus orderStatus = new OrderStatus();
@@ -52,6 +60,33 @@ public class MyOrderServiceImpl implements MyOrderService {
         orderStatus.setOrderStatus(EnumOrderStatus.WAIT_RECEIVE.type);
 
         orderStatusMapper.updateByPrimaryKeySelective(orderStatus);
+    }
+
+    @Transactional
+    @Override
+    public void confirmReceive(String orderId, String userId) {
+        OrderStatus orderStatus = new OrderStatus();
+        orderStatus.setOrderId(orderId);
+        orderStatus.setOrderStatus(EnumOrderStatus.SUCCESS.type);
+        orderStatus.setSuccessTime(new Date());
+
+        orderStatusMapper.updateByPrimaryKeySelective(orderStatus);
+    }
+
+    @Transactional
+    @Override
+    public void deleteOrder(String orderId, String userId) {
+        OrderStatus orderStatus = new OrderStatus();
+        orderStatus.setOrderId(orderId);
+        orderStatus.setOrderStatus(EnumOrderStatus.CLOSE.type);
+        orderStatusMapper.updateByPrimaryKeySelective(orderStatus);
+
+        Orders orders = new Orders();
+        orders.setIsDelete(YesOrNo.YES.type);
+        orders.setUpdatedTime(new Date());
+        orders.setId(orderId);
+        orders.setUserId(userId);
+        ordersMapper.updateByPrimaryKeySelective(orders);
     }
 
     private PagedGridResult setPagedResult(Integer page, List<?> result) {

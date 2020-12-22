@@ -17,6 +17,10 @@ public class CorsConfig {
         // 1.添加配置信息
         CorsConfiguration config = new CorsConfiguration();
         config.addAllowedOrigin("http://localhost:8080");
+        config.addAllowedOrigin("http://114.215.180.32:8080/foodie-shop");
+        config.addAllowedOrigin("http://114.215.180.32:8080");
+        config.addAllowedOrigin("114.215.180.32:8080");
+        config.addAllowedOrigin("114.215.180.32");
         // 2.设置是否发送cookie
         config.setAllowCredentials(true);
         // 3.设置允许请求的方式

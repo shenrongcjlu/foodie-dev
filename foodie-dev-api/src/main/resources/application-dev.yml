@@ -1,0 +1,4 @@
+spring:
+  datasource:                                           # 数据源的相关配置
+    username: root
+    password: nbcb,111

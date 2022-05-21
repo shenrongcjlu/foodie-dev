@@ -4,6 +4,7 @@ import com.imooc.ResultDTO;
 import com.imooc.dto.request.UserRequestDTO;
 import com.imooc.service.UserService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -31,6 +32,12 @@ public class PassportController {
 
     @PostMapping("/register")
     public ResultDTO<Void> register(@RequestBody @Valid UserRequestDTO param) {
+        if (userService.isUserExist(param.getUsername())) {
+            return ResultDTO.fail("用户名已经存在");
+        }
+        if (!StringUtils.equals(param.getPassword(), param.getConfirmPassword())) {
+            return ResultDTO.fail("两次输入的密码不一致");
+        }
         userService.createUser(param);
         return ResultDTO.success();
     }

@@ -26,6 +26,7 @@ public class UserRequestDTO {
     @ApiModelProperty("密码")
     private String password;
 
+    @Length(min = 6, max = 12)
     @NotBlank(message = "confirmPassword不能为空")
     @ApiModelProperty("确认密码")
     private String confirmPassword;

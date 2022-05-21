@@ -2,6 +2,7 @@ package com.imooc.service.impl;
 
 import com.imooc.dao.UserDao;
 import com.imooc.dto.request.UserRequestDTO;
+import com.imooc.enums.Sex;
 import com.imooc.pojo.Users;
 import com.imooc.service.UserService;
 import com.imooc.utils.MD5Utils;
@@ -31,11 +32,13 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void createUser(UserRequestDTO param) {
-
         Users users = new Users();
         users.setUsername(param.getUsername());
         users.setPassword(MD5Utils.getMD5Str(param.getPassword()));
         users.setNickname(param.getUsername());
         users.setBirthday(new Date());
+        users.setSex(Sex.SECRET.getType());
+
+        userDao.insert(users);
     }
 }

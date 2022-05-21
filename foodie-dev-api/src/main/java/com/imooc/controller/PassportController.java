@@ -33,5 +33,6 @@ public class PassportController {
     @PostMapping("/createUser")
     public ResultDTO<Void> createUser(@RequestBody @Valid UserRequestDTO param) {
         userService.createUser(param);
+        return ResultDTO.success();
     }
 }

@@ -17,4 +17,9 @@ public interface UserDao {
      */
     Users getByUserName(String userName);
 
+    /**
+     * 保存用户
+     * @param users
+     */
+    void insert(Users users);
 }

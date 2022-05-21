@@ -1,14 +1,13 @@
 package com.imooc.controller;
 
 import com.imooc.ResultDTO;
+import com.imooc.dto.request.UserRequestDTO;
 import com.imooc.service.UserService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 
 /**
@@ -31,4 +30,8 @@ public class PassportController {
         return ResultDTO.success(true);
     }
 
+    @PostMapping("/createUser")
+    public ResultDTO<Void> createUser(@RequestBody @Valid UserRequestDTO param) {
+        userService.createUser(param);
+    }
 }

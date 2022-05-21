@@ -20,6 +20,7 @@
         <module>foodie-dev-mapper</module>
         <module>foodie-dev-service</module>
         <module>foodie-dev-api</module>
+        <module>foodie-dev-starter</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -52,6 +53,11 @@
                 <artifactId>foodie-dev-service</artifactId>
                 <version>${foodie-dev.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.imooc</groupId>
+                <artifactId>foodie-dev-api</artifactId>
+                <version>${foodie-dev.version}</version>
+            </dependency>
             <!-- mysql驱动 -->
             <dependency>
                 <groupId>mysql</groupId>
@@ -75,6 +81,11 @@
                 <groupId>com.github.xiaoymin</groupId>
                 <artifactId>knife4j-spring-boot-starter</artifactId>
                 <version>2.0.7</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.plugin</groupId>
+                <artifactId>spring-plugin-core</artifactId>
+                <version>2.0.0.RELEASE</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

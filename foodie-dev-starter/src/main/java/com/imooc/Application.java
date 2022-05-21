@@ -11,7 +11,7 @@ import org.springframework.context.annotation.ComponentScan;
  * @date 2022/5/21 18:23
  */
 @SpringBootApplication
-@ComponentScan(basePackages = {"org.n3r.idworker"})
+@ComponentScan(basePackages = {"org.n3r.idworker", "com.imooc"})
 public class Application {
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);

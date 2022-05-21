@@ -3,6 +3,7 @@ package com.imooc.dto.request;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotBlank;
 
@@ -20,6 +21,7 @@ public class UserRequestDTO {
     @ApiModelProperty("用户名")
     private String username;
 
+    @Length(min = 6, max = 12)
     @NotBlank(message = "password不能为空")
     @ApiModelProperty("密码")
     private String password;

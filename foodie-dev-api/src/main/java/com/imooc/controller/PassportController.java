@@ -26,12 +26,11 @@ public class PassportController {
 
     @GetMapping("/usernameIsExist")
     public ResultDTO<Boolean> usernameIsExist(@RequestParam @NotBlank(message = "userName不能为空") String userName) {
-        boolean userExist = userService.isUserExist(userName);
-        return ResultDTO.success(true);
+        return ResultDTO.success(userService.isUserExist(userName));
     }
 
-    @PostMapping("/createUser")
-    public ResultDTO<Void> createUser(@RequestBody @Valid UserRequestDTO param) {
+    @PostMapping("/register")
+    public ResultDTO<Void> register(@RequestBody @Valid UserRequestDTO param) {
         userService.createUser(param);
         return ResultDTO.success();
     }

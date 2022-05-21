@@ -1,5 +1,6 @@
 package com.imooc.controller;
 
+import com.imooc.ResultDTO;
 import com.imooc.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,13 +26,9 @@ public class PassportController {
     private UserService userService;
 
     @GetMapping("/usernameIsExist")
-    public int usernameIsExist(@RequestParam @NotBlank(message = "userName不能为空") String userName) {
+    public ResultDTO<Boolean> usernameIsExist(@RequestParam @NotBlank(message = "userName不能为空") String userName) {
         boolean userExist = userService.isUserExist(userName);
-        if (userExist) {
-            return 200;
-        } else {
-            return 500;
-        }
+        return ResultDTO.success(true);
     }
 
 }

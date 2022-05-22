@@ -22,4 +22,11 @@ public interface UserDao {
      * @param users
      */
     void insert(Users users);
+
+    /**
+     *  @param userName
+     * @param password
+     * @return
+     */
+    Users getUserByNameAndPassword(String userName, String password);
 }

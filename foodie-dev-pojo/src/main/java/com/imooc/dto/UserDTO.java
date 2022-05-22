@@ -1,15 +1,18 @@
-package com.imooc.pojo;
+package com.imooc.dto;
 
-import com.imooc.dto.UserDTO;
 import lombok.Data;
-import org.springframework.beans.BeanUtils;
 
-import javax.persistence.Column;
 import javax.persistence.Id;
 import java.util.Date;
 
+/**
+ * 说明:
+ *
+ * @author 沈荣
+ * @date 2022/5/22 19:28
+ */
 @Data
-public class Users {
+public class UserDTO {
     /**
      * 主键id 用户id
      */
@@ -20,11 +23,6 @@ public class Users {
      * 用户名 用户名
      */
     private String username;
-
-    /**
-     * 密码 密码
-     */
-    private String password;
 
     /**
      * 昵称 昵称
@@ -64,22 +62,10 @@ public class Users {
     /**
      * 创建时间 创建时间
      */
-    @Column(name = "created_time")
     private Date createdTime;
 
     /**
      * 更新时间 更新时间
      */
-    @Column(name = "updated_time")
     private Date updatedTime;
-
-    public static UserDTO convert2DTO (Users users) {
-        if (users == null) {
-            return null;
-        }
-        UserDTO userDTO = new UserDTO();
-        BeanUtils.copyProperties(userDTO, userDTO);
-        return userDTO;
-    }
-
 }

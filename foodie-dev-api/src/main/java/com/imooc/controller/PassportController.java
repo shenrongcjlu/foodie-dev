@@ -1,7 +1,9 @@
 package com.imooc.controller;
 
 import com.imooc.ResultDTO;
-import com.imooc.dto.request.UserRequestDTO;
+import com.imooc.dto.UserDTO;
+import com.imooc.dto.request.UserCreateRequestDTO;
+import com.imooc.dto.request.UserLoginRequestDTO;
 import com.imooc.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -36,7 +38,7 @@ public class PassportController {
 
     @ApiOperation("注册用户")
     @PostMapping("/regist")
-    public ResultDTO<Void> regist(@RequestBody @Valid UserRequestDTO param) {
+    public ResultDTO<Void> regist(@RequestBody @Valid UserCreateRequestDTO param) {
         if (userService.isUserExist(param.getUsername())) {
             return ResultDTO.fail("用户名已经存在");
         }
@@ -45,5 +47,15 @@ public class PassportController {
         }
         userService.createUser(param);
         return ResultDTO.success();
+    }
+
+    @ApiOperation("登陆")
+    @PostMapping("login")
+    public ResultDTO<UserDTO> login(@RequestBody @Valid UserLoginRequestDTO param) {
+        UserDTO userDTO = userService.getUserByNameAndPassword(param.getUsername(), param.getPassword());
+        if (userDTO == null) {
+            return ResultDTO.fail("用户名或密码错误");
+        }
+        return ResultDTO.success(userDTO);
     }
 }

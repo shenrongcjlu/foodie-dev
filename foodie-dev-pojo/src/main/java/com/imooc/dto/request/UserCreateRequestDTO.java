@@ -15,7 +15,7 @@ import javax.validation.constraints.NotBlank;
  */
 @Data
 @ApiModel
-public class UserRequestDTO {
+public class UserCreateRequestDTO {
 
     @NotBlank(message = "username不能为空")
     @ApiModelProperty("用户名")

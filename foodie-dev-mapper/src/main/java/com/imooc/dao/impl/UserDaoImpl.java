@@ -38,4 +38,13 @@ public class UserDaoImpl implements UserDao {
         users.setUpdatedTime(new Date());
         usersMapper.insert(users);
     }
+
+    @Override
+    public Users getUserByNameAndPassword(String userName, String password) {
+        Example example = new Example(Users.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("username", userName);
+        criteria.andEqualTo("password", password);
+        return usersMapper.selectOneByExample(example);
+    }
 }

@@ -1,6 +1,7 @@
 package com.imooc.service;
 
-import com.imooc.dto.request.UserRequestDTO;
+import com.imooc.dto.UserDTO;
+import com.imooc.dto.request.UserCreateRequestDTO;
 
 /**
  * 说明
@@ -19,5 +20,13 @@ public interface UserService {
      * 创建用户
      * @param param
      */
-    void createUser(UserRequestDTO param);
+    void createUser(UserCreateRequestDTO param);
+
+    /**
+     * 根据用户名和密码
+     * @param userName
+     * @param password
+     * @return
+     */
+    UserDTO getUserByNameAndPassword(String userName, String password);
 }

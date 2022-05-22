@@ -2,7 +2,9 @@ package com.imooc.controller;
 
 import com.imooc.ResultDTO;
 import com.imooc.pojo.Carousel;
+import com.imooc.pojo.Category;
 import com.imooc.service.CarouselService;
+import com.imooc.service.CategoryService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,11 +27,19 @@ public class IndexController {
 
     @Resource
     private CarouselService carouselService;
+    @Resource
+    private CategoryService categoryService;
 
     @ApiOperation("轮播图")
     @GetMapping("/carousel")
     public ResultDTO<List<Carousel>> carousel() {
         return ResultDTO.success(carouselService.listAll(1));
+    }
+
+    @ApiOperation("查询产品分类")
+    @GetMapping("/cats")
+    public ResultDTO<List<Category>> cats() {
+        return ResultDTO.success(categoryService.listRootCategory());
     }
 
 }

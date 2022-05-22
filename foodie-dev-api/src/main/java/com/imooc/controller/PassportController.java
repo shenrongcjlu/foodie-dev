@@ -5,6 +5,9 @@ import com.imooc.dto.UserDTO;
 import com.imooc.dto.request.UserCreateRequestDTO;
 import com.imooc.dto.request.UserLoginRequestDTO;
 import com.imooc.service.UserService;
+import com.imooc.utils.CookieUtils;
+import com.imooc.utils.JsonUtils;
+import com.imooc.utils.MD5Utils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -12,6 +15,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 
@@ -50,12 +55,16 @@ public class PassportController {
     }
 
     @ApiOperation("登陆")
-    @PostMapping("login")
-    public ResultDTO<UserDTO> login(@RequestBody @Valid UserLoginRequestDTO param) {
-        UserDTO userDTO = userService.getUserByNameAndPassword(param.getUsername(), param.getPassword());
+    @PostMapping("/login")
+    public ResultDTO<UserDTO> login(
+            @RequestBody @Valid UserLoginRequestDTO param,
+            HttpServletRequest request,
+            HttpServletResponse response) {
+        UserDTO userDTO = userService.getUserByNameAndPassword(param.getUsername(), MD5Utils.getMD5Str(param.getPassword()));
         if (userDTO == null) {
             return ResultDTO.fail("用户名或密码错误");
         }
+        CookieUtils.setCookie(request, response, "user", JsonUtils.objectToJson(userDTO), true);
         return ResultDTO.success(userDTO);
     }
 }

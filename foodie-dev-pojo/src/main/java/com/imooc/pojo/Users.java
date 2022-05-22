@@ -78,7 +78,7 @@ public class Users {
             return null;
         }
         UserDTO userDTO = new UserDTO();
-        BeanUtils.copyProperties(userDTO, userDTO);
+        BeanUtils.copyProperties(users, userDTO);
         return userDTO;
     }
 

@@ -67,4 +67,14 @@ public class PassportController {
         CookieUtils.setCookie(request, response, "user", JsonUtils.objectToJson(userDTO), true);
         return ResultDTO.success(userDTO);
     }
+
+    @ApiOperation("注销")
+    @PostMapping("/logout")
+    public ResultDTO<Void> logout(
+            @RequestParam String userId,
+            HttpServletRequest request,
+            HttpServletResponse response) {
+        CookieUtils.deleteCookie(request, response, "user");
+        return ResultDTO.success();
+    }
 }

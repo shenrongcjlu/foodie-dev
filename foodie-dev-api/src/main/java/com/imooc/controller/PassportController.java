@@ -35,8 +35,8 @@ public class PassportController {
     }
 
     @ApiOperation("注册用户")
-    @PostMapping("/register")
-    public ResultDTO<Void> register(@RequestBody @Valid UserRequestDTO param) {
+    @PostMapping("/regist")
+    public ResultDTO<Void> regist(@RequestBody @Valid UserRequestDTO param) {
         if (userService.isUserExist(param.getUsername())) {
             return ResultDTO.fail("用户名已经存在");
         }

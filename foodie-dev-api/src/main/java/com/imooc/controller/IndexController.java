@@ -1,6 +1,7 @@
 package com.imooc.controller;
 
 import com.imooc.ResultDTO;
+import com.imooc.dto.response.CategoryDTO;
 import com.imooc.pojo.Carousel;
 import com.imooc.pojo.Category;
 import com.imooc.service.CarouselService;
@@ -8,6 +9,7 @@ import com.imooc.service.CategoryService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -42,4 +44,9 @@ public class IndexController {
         return ResultDTO.success(categoryService.listRootCategory());
     }
 
+    @ApiOperation("获取商品子分类")
+    @GetMapping("/subCat/{rootCatId}")
+    public ResultDTO<List<CategoryDTO>> subCat(@PathVariable Integer rootCatId) {
+        return ResultDTO.success(categoryService.subCat(rootCatId));
+    }
 }

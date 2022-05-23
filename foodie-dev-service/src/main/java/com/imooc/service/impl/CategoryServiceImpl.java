@@ -1,6 +1,7 @@
 package com.imooc.service.impl;
 
 import com.imooc.dao.CategoryDao;
+import com.imooc.dto.response.CategoryDTO;
 import com.imooc.pojo.Category;
 import com.imooc.service.CategoryService;
 import org.springframework.stereotype.Service;
@@ -23,5 +24,10 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public List<Category> listRootCategory() {
         return categoryDao.listRootCategory();
+    }
+
+    @Override
+    public List<CategoryDTO> subCat(Integer fatherCatId) {
+        return categoryDao.getSubCatInfo(fatherCatId);
     }
 }

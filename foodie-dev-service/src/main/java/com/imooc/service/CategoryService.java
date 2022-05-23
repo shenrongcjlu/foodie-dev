@@ -1,5 +1,6 @@
 package com.imooc.service;
 
+import com.imooc.dto.response.CategoryDTO;
 import com.imooc.pojo.Category;
 
 import java.util.List;
@@ -18,4 +19,10 @@ public interface CategoryService {
      */
     List<Category> listRootCategory();
 
+    /**
+     * 查询子分类
+     * @return
+     * @param fatherCatId
+     */
+    List<CategoryDTO> subCat(Integer fatherCatId);
 }

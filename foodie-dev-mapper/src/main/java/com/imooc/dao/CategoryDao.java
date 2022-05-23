@@ -1,5 +1,6 @@
 package com.imooc.dao;
 
+import com.imooc.dto.response.CategoryDTO;
 import com.imooc.pojo.Category;
 
 import java.util.List;
@@ -18,4 +19,24 @@ public interface CategoryDao {
      */
     List<Category> listRootCategory();
 
+    /**
+     * 根据id查询
+     * @param id
+     * @return
+     */
+    Category getById(Integer id);
+
+    /**
+     * 根据父id查询
+     * @param fatherCatId
+     * @return
+     */
+    List<Category> listByFatherCatId(Integer fatherCatId);
+
+    /**
+     * 获取子目录信息
+     * @param fatherCatId
+     * @return
+     */
+    List<CategoryDTO> getSubCatInfo(Integer fatherCatId);
 }

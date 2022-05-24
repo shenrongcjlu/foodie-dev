@@ -1,6 +1,7 @@
 package com.imooc.service.impl;
 
 import com.imooc.dao.CategoryDao;
+import com.imooc.dto.NewItemsDTO;
 import com.imooc.dto.response.CategoryDTO;
 import com.imooc.pojo.Category;
 import com.imooc.service.CategoryService;
@@ -29,5 +30,10 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public List<CategoryDTO> subCat(Integer fatherCatId) {
         return categoryDao.getSubCatInfo(fatherCatId);
+    }
+
+    @Override
+    public List<NewItemsDTO> getSixNewItemsLazy(Integer fatherCatId) {
+       return categoryDao.getSixNewItemsLazy(fatherCatId);
     }
 }

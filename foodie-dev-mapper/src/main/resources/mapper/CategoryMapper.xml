@@ -25,7 +25,20 @@
     </collection>
   </resultMap>
 
-  <select id="getSubCatList" resultMap="CategoryDTO">
+    <resultMap id="NewItemsDTO" type="com.imooc.dto.NewItemsDTO" >
+        <id column="rootCatId" property="rootCatId" jdbcType="INTEGER" />
+        <result column="rootCatName" property="rootCatName" jdbcType="VARCHAR" />
+        <result column="slogan" property="slogan" jdbcType="VARCHAR" />
+        <result column="catImage" property="catImage" jdbcType="VARCHAR" />
+        <result column="bgColor" property="bgColor" jdbcType="VARCHAR" />
+        <collection property="simpleItemList" ofType="com.imooc.dto.SimpleItemDTO">
+            <id column="itemId" property="itemId" jdbcType="INTEGER" />
+            <result column="itemName" property="itemName" jdbcType="VARCHAR" />
+            <result column="itemUrl" property="itemUrl" jdbcType="VARCHAR" />
+        </collection>
+    </resultMap>
+
+    <select id="getSubCatList" resultMap="CategoryDTO">
     SELECT
         f.id as id,
         f.`name` as `name`,
@@ -38,5 +51,21 @@
     FROM category f
     LEFT JOIN category c on f.id = c.father_id
     WHERE f.father_id = #{fatherId}
+  </select>
+
+  <select id="getSixNewItemsLazy" resultMap="NewItemsDTO">
+    SELECT
+        c.id as rootCatId,
+        c.`name` AS rootCatName,
+        c.slogan,
+        c.cat_image as catImage,
+        c.bg_color as bgColor,
+        i.id as itemId,
+        i.item_name as itemName,
+        ii.url as itemUrl
+    FROM category c
+    LEFT JOIN items i on c.id = i.root_cat_id
+    LEFT JOIN items_img ii on ii.item_id = i.id
+    WHERE i.root_cat_id = #{fatherCatId} and ii.is_main = 1
   </select>
 </mapper>

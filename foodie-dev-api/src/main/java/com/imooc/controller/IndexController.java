@@ -1,6 +1,7 @@
 package com.imooc.controller;
 
 import com.imooc.ResultDTO;
+import com.imooc.dto.NewItemsDTO;
 import com.imooc.dto.response.CategoryDTO;
 import com.imooc.pojo.Carousel;
 import com.imooc.pojo.Category;
@@ -48,5 +49,11 @@ public class IndexController {
     @GetMapping("/subCat/{rootCatId}")
     public ResultDTO<List<CategoryDTO>> subCat(@PathVariable Integer rootCatId) {
         return ResultDTO.success(categoryService.subCat(rootCatId));
+    }
+
+    @ApiOperation("获取一级分类下6条最新商品")
+    @GetMapping("/sixNewItems/{rootCatId}")
+    public ResultDTO<List<NewItemsDTO>> sixNewItems(@PathVariable Integer rootCatId) {
+        return ResultDTO.success(categoryService.getSixNewItemsLazy(rootCatId));
     }
 }

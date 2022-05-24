@@ -1,6 +1,7 @@
 package com.imooc.dao.impl;
 
 import com.imooc.dao.CategoryDao;
+import com.imooc.dto.NewItemsDTO;
 import com.imooc.dto.response.CategoryDTO;
 import com.imooc.mapper.CategoryMapper;
 import com.imooc.pojo.Category;
@@ -49,5 +50,10 @@ public class CategoryDaoImpl implements CategoryDao {
     @Override
     public List<CategoryDTO> getSubCatInfo(Integer fatherCatId) {
         return categoryMapper.getSubCatList(fatherCatId);
+    }
+
+    @Override
+    public List<NewItemsDTO> getSixNewItemsLazy(Integer fatherCatId) {
+        return categoryMapper.getSixNewItemsLazy(fatherCatId);
     }
 }

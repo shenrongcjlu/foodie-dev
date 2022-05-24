@@ -1,5 +1,6 @@
 package com.imooc.service;
 
+import com.imooc.dto.NewItemsDTO;
 import com.imooc.dto.response.CategoryDTO;
 import com.imooc.pojo.Category;
 
@@ -25,4 +26,10 @@ public interface CategoryService {
      * @param fatherCatId
      */
     List<CategoryDTO> subCat(Integer fatherCatId);
+
+    /**
+     * 查询分类下到六条最新商品数据
+     * @param fatherCatId
+     */
+    List<NewItemsDTO> getSixNewItemsLazy(Integer fatherCatId);
 }

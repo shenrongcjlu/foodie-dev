@@ -7,8 +7,10 @@ import com.imooc.dto.CommentDTO;
 import com.imooc.dto.PageDTO;
 import com.imooc.mapper.ItemsCommentsMapper;
 import com.imooc.pojo.ItemsComments;
+import com.imooc.utils.DesensitizationUtil;
 import com.imooc.utils.PagedGridResult;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.CollectionUtils;
 import tk.mybatis.mapper.entity.Example;
 
 import javax.annotation.Resource;
@@ -39,6 +41,9 @@ public class CommentDaoImpl implements CommentDao {
     public PagedGridResult listItemCommentsPage(String itemId, Integer level, PageDTO pageDTO) {
         PageHelper.startPage(pageDTO.getPage(), pageDTO.getPageSize());
         List<CommentDTO> commentDTOS = itemsCommentsMapper.listItemComments(itemId, level);
+        if (!CollectionUtils.isEmpty(commentDTOS)) {
+            commentDTOS.forEach(item -> item.setNickname(DesensitizationUtil.commonDisplay(item.getNickname())));
+        }
         PageInfo<CommentDTO> pageInfo = new PageInfo(commentDTOS);
         PagedGridResult gridResult = new PagedGridResult();
         gridResult.setPage(pageDTO.getPage());

@@ -1,5 +1,6 @@
 package com.imooc.service;
 
+import com.imooc.dto.CommentLevelCountsDTO;
 import com.imooc.dto.ItemDetailDTO;
 import com.imooc.pojo.Items;
 import com.imooc.pojo.ItemsImg;
@@ -50,4 +51,11 @@ public interface ItemService {
      * @return
      */
     ItemDetailDTO getItemDetail(String itemId);
+
+    /**
+     * 获得商品评价数量
+     * @param itemId
+     * @return
+     */
+    CommentLevelCountsDTO getCommentCounts(String itemId);
 }

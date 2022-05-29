@@ -1,12 +1,14 @@
 package com.imooc.dao.impl;
 
 import com.imooc.dao.CommentDao;
+import com.imooc.dto.CommentDTO;
 import com.imooc.mapper.ItemsCommentsMapper;
 import com.imooc.pojo.ItemsComments;
 import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.entity.Example;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * 说明：
@@ -27,5 +29,10 @@ public class CommentDaoImpl implements CommentDao {
         criteria.andEqualTo("itemId", itemId);
         criteria.andEqualTo("commentLevel", level);
         return itemsCommentsMapper.selectCountByExample(example);
+    }
+
+    @Override
+    public List<CommentDTO> listItemComments(String itemId, Integer level) {
+        return itemsCommentsMapper.listItemComments(itemId, level);
     }
 }

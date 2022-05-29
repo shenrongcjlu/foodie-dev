@@ -2,6 +2,7 @@ package com.imooc.service.impl;
 
 import com.imooc.dao.CommentDao;
 import com.imooc.dao.ItemDao;
+import com.imooc.dto.CommentDTO;
 import com.imooc.dto.CommentLevelCountsDTO;
 import com.imooc.dto.ItemDetailDTO;
 import com.imooc.enums.CommentLevel;
@@ -72,5 +73,10 @@ public class ItemServiceImpl implements ItemService {
         commentLevelCountsDTO.setBadCounts(badCommentCount);
         commentLevelCountsDTO.setTotalCounts(goodCommentCount + normalCommentCount + badCommentCount);
         return commentLevelCountsDTO;
+    }
+
+    @Override
+    public List<CommentDTO> listComments(String itemId, Integer level) {
+        return commentDao.listItemComments(itemId, level);
     }
 }

@@ -16,4 +16,18 @@
     <result column="created_time" property="createdTime" jdbcType="TIMESTAMP" />
     <result column="updated_time" property="updatedTime" jdbcType="TIMESTAMP" />
   </resultMap>
+
+  <select id="listItemComments" resultType="com.imooc.dto.CommentDTO">
+    select
+        ic.comment_level as commentLevel,
+        ic.content as content,
+        ic.sepc_name as specName,
+        ic.created_time as createdTime,
+        u.face as userFace,
+        u.nickname as nickName
+    from
+        items_comments ic left join users u on ic.user_id = u.id
+    where
+        ic.item_id = #{itemId} and ic.comment_level = #{level}
+  </select>
 </mapper>

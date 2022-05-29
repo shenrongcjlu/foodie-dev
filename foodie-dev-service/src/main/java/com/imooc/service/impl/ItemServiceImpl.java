@@ -52,7 +52,7 @@ public class ItemServiceImpl implements ItemService {
         itemDetailDTO.setItem(itemDao.getById(itemId));
         itemDetailDTO.setItemImgList(itemDao.listItemImages(itemId));
         itemDetailDTO.setItemSpecList(itemDao.listItemSpecs(itemId));
-        itemDetailDTO.setItemParam(itemDao.getItemParam(itemId));
+        itemDetailDTO.setItemParams(itemDao.getItemParam(itemId));
         return itemDetailDTO;
     }
 }

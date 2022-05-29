@@ -14,6 +14,6 @@ public class ItemDetailDTO {
     private Items item;
     private List<ItemsImg> itemImgList;
     private List<ItemsSpec> itemSpecList;
-    private ItemsParam itemParam;
+    private ItemsParam itemParams;
 
 }

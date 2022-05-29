@@ -1,10 +1,11 @@
 package com.imooc.controller;
 
 import com.imooc.ResultDTO;
-import com.imooc.dto.CommentDTO;
 import com.imooc.dto.CommentLevelCountsDTO;
 import com.imooc.dto.ItemDetailDTO;
+import com.imooc.dto.PageDTO;
 import com.imooc.service.ItemService;
+import com.imooc.utils.PagedGridResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -12,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.constraints.NotNull;
-import java.util.List;
 
 @Slf4j
 @RestController
@@ -37,14 +37,17 @@ public class ItemController {
 
     @ApiOperation("查询商品评论")
     @GetMapping("/comments")
-    public ResultDTO<List<CommentDTO>> listComments(
+    public ResultDTO<PagedGridResult> listComments(
             @RequestParam @NotNull(message = "itemId不能为空") String itemId,
-            @RequestParam Integer level) {
+            @RequestParam Integer level,
+            @RequestParam Integer page,
+            @RequestParam Integer pageSize) {
         if (level == null) {
             level = 1;
         }
-        return ResultDTO.success(itemService.listComments(itemId, level));
+        PageDTO pageDTO = new PageDTO();
+        pageDTO.setPage(page);
+        pageDTO.setPageSize(pageSize);
+        return ResultDTO.success(itemService.listCommentsPage(itemId, level, pageDTO));
     }
-
-
 }

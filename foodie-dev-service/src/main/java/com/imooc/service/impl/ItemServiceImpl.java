@@ -2,15 +2,16 @@ package com.imooc.service.impl;
 
 import com.imooc.dao.CommentDao;
 import com.imooc.dao.ItemDao;
-import com.imooc.dto.CommentDTO;
 import com.imooc.dto.CommentLevelCountsDTO;
 import com.imooc.dto.ItemDetailDTO;
+import com.imooc.dto.PageDTO;
 import com.imooc.enums.CommentLevel;
 import com.imooc.pojo.Items;
 import com.imooc.pojo.ItemsImg;
 import com.imooc.pojo.ItemsParam;
 import com.imooc.pojo.ItemsSpec;
 import com.imooc.service.ItemService;
+import com.imooc.utils.PagedGridResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -76,7 +77,7 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public List<CommentDTO> listComments(String itemId, Integer level) {
-        return commentDao.listItemComments(itemId, level);
+    public PagedGridResult listCommentsPage(String itemId, Integer level, PageDTO pageDTO) {
+        return commentDao.listItemCommentsPage(itemId, level, pageDTO);
     }
 }

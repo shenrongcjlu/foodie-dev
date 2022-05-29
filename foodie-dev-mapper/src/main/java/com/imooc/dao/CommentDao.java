@@ -1,8 +1,7 @@
 package com.imooc.dao;
 
-import com.imooc.dto.CommentDTO;
-
-import java.util.List;
+import com.imooc.dto.PageDTO;
+import com.imooc.utils.PagedGridResult;
 
 /**
  * 说明：
@@ -14,5 +13,5 @@ public interface CommentDao {
 
     Integer getCommentCount(String itemId, Integer level);
 
-    List<CommentDTO> listItemComments(String itemId, Integer level);
+    PagedGridResult listItemCommentsPage(String itemId, Integer level, PageDTO pageDTO);
 }

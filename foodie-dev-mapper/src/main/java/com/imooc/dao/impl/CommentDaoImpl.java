@@ -1,9 +1,13 @@
 package com.imooc.dao.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.imooc.dao.CommentDao;
 import com.imooc.dto.CommentDTO;
+import com.imooc.dto.PageDTO;
 import com.imooc.mapper.ItemsCommentsMapper;
 import com.imooc.pojo.ItemsComments;
+import com.imooc.utils.PagedGridResult;
 import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.entity.Example;
 
@@ -32,7 +36,15 @@ public class CommentDaoImpl implements CommentDao {
     }
 
     @Override
-    public List<CommentDTO> listItemComments(String itemId, Integer level) {
-        return itemsCommentsMapper.listItemComments(itemId, level);
+    public PagedGridResult listItemCommentsPage(String itemId, Integer level, PageDTO pageDTO) {
+        PageHelper.startPage(pageDTO.getPage(), pageDTO.getPageSize());
+        List<CommentDTO> commentDTOS = itemsCommentsMapper.listItemComments(itemId, level);
+        PageInfo<CommentDTO> pageInfo = new PageInfo(commentDTOS);
+        PagedGridResult gridResult = new PagedGridResult();
+        gridResult.setPage(pageDTO.getPage());
+        gridResult.setRows(commentDTOS);
+        gridResult.setTotal(pageInfo.getPages());
+        gridResult.setRecords(pageInfo.getTotal());
+        return gridResult;
     }
 }

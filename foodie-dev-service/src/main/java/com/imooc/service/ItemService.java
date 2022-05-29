@@ -1,5 +1,6 @@
 package com.imooc.service;
 
+import com.imooc.dto.ItemDetailDTO;
 import com.imooc.pojo.Items;
 import com.imooc.pojo.ItemsImg;
 import com.imooc.pojo.ItemsParam;
@@ -43,4 +44,10 @@ public interface ItemService {
      */
     ItemsParam getItemParam(String itemId);
 
+    /**
+     * 获得商品详情
+     * @param itemId
+     * @return
+     */
+    ItemDetailDTO getItemDetail(String itemId);
 }

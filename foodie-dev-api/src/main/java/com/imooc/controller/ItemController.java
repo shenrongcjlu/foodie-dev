@@ -4,6 +4,7 @@ import com.imooc.ResultDTO;
 import com.imooc.dto.CommentLevelCountsDTO;
 import com.imooc.dto.ItemDetailDTO;
 import com.imooc.dto.PageDTO;
+import com.imooc.dto.request.SearchItemReqDTO;
 import com.imooc.service.ItemService;
 import com.imooc.utils.PagedGridResult;
 import io.swagger.annotations.Api;
@@ -49,5 +50,20 @@ public class ItemController {
         pageDTO.setPage(page);
         pageDTO.setPageSize(pageSize);
         return ResultDTO.success(itemService.listCommentsPage(itemId, level, pageDTO));
+    }
+
+    @ApiOperation("查询商品")
+    @GetMapping("/search")
+    public ResultDTO<PagedGridResult> listComments(
+            @RequestParam String keywords,
+            @RequestParam String sort,
+            @RequestParam Integer page,
+            @RequestParam Integer pageSize) {
+        SearchItemReqDTO query = new SearchItemReqDTO();
+        query.setKeywords(keywords);
+        query.setSort(sort);
+        query.setPage(page);
+        query.setPageSize(pageSize);
+        return ResultDTO.success(itemService.searchItems(query));
     }
 }

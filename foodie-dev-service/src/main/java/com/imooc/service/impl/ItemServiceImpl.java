@@ -1,10 +1,11 @@
 package com.imooc.service.impl;
 
 import com.imooc.dao.CommentDao;
-import com.imooc.dao.ItemDao;
+import com.imooc.dao.ItemsDao;
 import com.imooc.dto.CommentLevelCountsDTO;
 import com.imooc.dto.ItemDetailDTO;
 import com.imooc.dto.PageDTO;
+import com.imooc.dto.request.SearchItemReqDTO;
 import com.imooc.enums.CommentLevel;
 import com.imooc.pojo.Items;
 import com.imooc.pojo.ItemsImg;
@@ -29,7 +30,7 @@ import java.util.List;
 public class ItemServiceImpl implements ItemService {
 
     @Resource
-    private ItemDao itemDao;
+    private ItemsDao itemDao;
     @Resource
     private CommentDao commentDao;
 
@@ -79,5 +80,10 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public PagedGridResult listCommentsPage(String itemId, Integer level, PageDTO pageDTO) {
         return commentDao.listItemCommentsPage(itemId, level, pageDTO);
+    }
+
+    @Override
+    public PagedGridResult searchItems(SearchItemReqDTO query) {
+        return itemDao.searchItems(query);
     }
 }

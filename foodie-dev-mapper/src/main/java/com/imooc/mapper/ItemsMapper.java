@@ -1,9 +1,22 @@
 package com.imooc.mapper;
 
+import com.imooc.dto.request.SearchItemReqDTO;
+import com.imooc.dto.response.SearchItemRespDTO;
 import com.imooc.my.mapper.MyMapper;
 import com.imooc.pojo.Items;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 @Mapper
 public interface ItemsMapper extends MyMapper<Items> {
+
+    /**
+     * 搜索商品
+     * @param query
+     */
+    List<SearchItemRespDTO> searchItems(@Param("query") SearchItemReqDTO query);
+
+
 }

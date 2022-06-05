@@ -3,6 +3,7 @@ package com.imooc.service;
 import com.imooc.dto.CommentLevelCountsDTO;
 import com.imooc.dto.ItemDetailDTO;
 import com.imooc.dto.PageDTO;
+import com.imooc.dto.request.SearchItemReqDTO;
 import com.imooc.pojo.Items;
 import com.imooc.pojo.ItemsImg;
 import com.imooc.pojo.ItemsParam;
@@ -69,4 +70,11 @@ public interface ItemService {
      * @return
      */
     PagedGridResult listCommentsPage(String itemId, Integer level, PageDTO pageDTO);
+
+    /**
+     *
+     * @param query
+     * @return
+     */
+    PagedGridResult searchItems(SearchItemReqDTO query);
 }

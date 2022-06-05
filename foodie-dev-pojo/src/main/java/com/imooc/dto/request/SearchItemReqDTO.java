@@ -22,4 +22,9 @@ public class SearchItemReqDTO extends PageDTO {
      */
     private String sort;
 
+    /**
+     * 分类id
+     */
+    private Integer catId;
+
 }

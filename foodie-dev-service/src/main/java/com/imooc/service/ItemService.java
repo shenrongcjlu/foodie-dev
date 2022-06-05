@@ -77,4 +77,7 @@ public interface ItemService {
      * @return
      */
     PagedGridResult searchItems(SearchItemReqDTO query);
+
+
+    PagedGridResult searchItemsByThirdCategory(SearchItemReqDTO query);
 }

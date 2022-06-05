@@ -18,5 +18,12 @@ public interface ItemsMapper extends MyMapper<Items> {
      */
     List<SearchItemRespDTO> searchItems(@Param("query") SearchItemReqDTO query);
 
+    /**
+     * 根据三级分类查询
+     * @param query
+     * @return
+     */
+    List<SearchItemRespDTO> searchItemsByThirdCategory(@Param("query") SearchItemReqDTO query);
+
 
 }

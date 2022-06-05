@@ -70,4 +70,10 @@ public class ItemDaoImpl implements ItemsDao {
         PageHelper.startPage(query.getPage(), query.getPageSize());
         return PageUtil.getPageResult(itemsMapper.searchItems(query));
     }
+
+    @Override
+    public PagedGridResult searchItemsByThirdCategory(SearchItemReqDTO query) {
+        PageHelper.startPage(query.getPage(), query.getPageSize());
+        return PageUtil.getPageResult(itemsMapper.searchItemsByThirdCategory(query));
+    }
 }

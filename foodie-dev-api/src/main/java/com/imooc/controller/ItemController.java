@@ -66,4 +66,19 @@ public class ItemController {
         query.setPageSize(pageSize);
         return ResultDTO.success(itemService.searchItems(query));
     }
+
+    @ApiOperation("根据三级分类查找商品")
+    @GetMapping("/catItems")
+    public ResultDTO<PagedGridResult> catItems(
+            @RequestParam Integer catId,
+            @RequestParam String sort,
+            @RequestParam Integer page,
+            @RequestParam Integer pageSize) {
+        SearchItemReqDTO query = new SearchItemReqDTO();
+        query.setCatId(catId);
+        query.setSort(sort);
+        query.setPage(page);
+        query.setPageSize(pageSize);
+        return ResultDTO.success(itemService.searchItemsByThirdCategory(query));
+    }
 }

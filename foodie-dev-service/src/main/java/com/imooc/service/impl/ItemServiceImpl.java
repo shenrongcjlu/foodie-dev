@@ -86,4 +86,9 @@ public class ItemServiceImpl implements ItemService {
     public PagedGridResult searchItems(SearchItemReqDTO query) {
         return itemDao.searchItems(query);
     }
+
+    @Override
+    public PagedGridResult searchItemsByThirdCategory(SearchItemReqDTO query) {
+        return itemDao.searchItemsByThirdCategory(query);
+    }
 }

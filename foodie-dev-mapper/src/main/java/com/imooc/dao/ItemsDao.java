@@ -19,6 +19,7 @@ public interface ItemsDao {
 
     /**
      * 根据id查询商品
+     *
      * @param itemId
      * @return
      */
@@ -26,6 +27,7 @@ public interface ItemsDao {
 
     /**
      * 查询商品下的图片
+     *
      * @param itemId
      * @return
      */
@@ -33,6 +35,7 @@ public interface ItemsDao {
 
     /**
      * 查询商品下规格
+     *
      * @param itemId
      * @return
      */
@@ -40,6 +43,7 @@ public interface ItemsDao {
 
     /**
      * 查询商品参数
+     *
      * @param itemId
      * @return
      */
@@ -47,7 +51,11 @@ public interface ItemsDao {
 
     /**
      * 根据条件查询
+     *
      * @param query
      */
     PagedGridResult searchItems(SearchItemReqDTO query);
+
+    PagedGridResult searchItemsByThirdCategory(SearchItemReqDTO query);
+
 }

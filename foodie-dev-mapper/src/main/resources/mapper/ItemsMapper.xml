@@ -47,6 +47,36 @@
              i.item_name desc
          </otherwise>
      </choose>
-
   </select>
+
+    <select id="searchItemsByThirdCategory" resultType="com.imooc.dto.response.SearchItemRespDTO">
+        SELECT
+        i.id itemId,
+        i.item_name itemName,
+        i.sell_counts sellCounts,
+        ii.url imgUrl,
+        tmp.price_discount price
+        FROM items i
+        LEFT JOIN items_img ii on i.id = ii.item_id
+        LEFT JOIN (SELECT
+        item_id iId,
+        MIN(price_discount) price_discount
+        FROM items_spec
+        GROUP BY item_id
+        ) tmp on i.id = tmp.iId
+        WHERE ii.is_main = 1
+              and i.cat_id = #{query.catId}
+        order by
+        <choose>
+            <when test="query.sort == &quot;c&quot;">
+                i.sell_counts desc
+            </when>
+            <when test="query.sort == &quot;p&quot;">
+                tmp.price_discount desc
+            </when>
+            <otherwise>
+                i.item_name desc
+            </otherwise>
+        </choose>
+    </select>
 </mapper>

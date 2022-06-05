@@ -18,9 +18,9 @@
     <result column="type" property="type" jdbcType="INTEGER" />
     <result column="fatherId" property="fatherId" jdbcType="INTEGER" />
     <collection property="subCatList" ofType="com.imooc.dto.response.SubCategoryDTO">
-      <id column="id" property="subId" jdbcType="INTEGER" />
-      <result column="name" property="subName" jdbcType="VARCHAR" />
-      <result column="type" property="subType" jdbcType="INTEGER" />
+      <id column="subId" property="subId" jdbcType="INTEGER" />
+      <result column="subName" property="subName" jdbcType="VARCHAR" />
+      <result column="subType" property="subType" jdbcType="INTEGER" />
       <result column="subFatherId" property="subFatherId" jdbcType="INTEGER" />
     </collection>
   </resultMap>

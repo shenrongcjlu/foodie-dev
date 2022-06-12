@@ -32,4 +32,16 @@ public interface AddressService {
      * @param param
      */
     void updateAddress(AddressUpdateReqDTO param);
+
+    /**
+     * 删除地址
+     * @param addressId
+     */
+    void deleteAddress(String addressId);
+
+    /**
+     * 设置默认地址
+     * @param addressId
+     */
+    void setDefaultAddress(String addressId);
 }

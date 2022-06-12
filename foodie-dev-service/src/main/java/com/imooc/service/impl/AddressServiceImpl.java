@@ -4,11 +4,13 @@ import com.imooc.LoginContext;
 import com.imooc.dao.AddressDao;
 import com.imooc.dto.request.AddressAddReqDTO;
 import com.imooc.dto.request.AddressUpdateReqDTO;
+import com.imooc.exception.BizException;
 import com.imooc.pojo.UserAddress;
 import com.imooc.service.AddressService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
@@ -33,6 +35,7 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
+    @Transactional
     public void addAddress(AddressAddReqDTO param) {
         UserAddress address = new UserAddress();
         BeanUtils.copyProperties(param, address);
@@ -45,10 +48,32 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
+    @Transactional
     public void updateAddress(AddressUpdateReqDTO param) {
         UserAddress address = new UserAddress();
         BeanUtils.copyProperties(param, address);
         address.setId(param.getAddressId());
         addressDao.updateAddress(address);
     }
+
+    @Override
+    @Transactional
+    public void deleteAddress(String addressId) {
+        addressDao.deleteById(addressId);
+    }
+
+    @Override
+    @Transactional
+    public void setDefaultAddress(String addressId) {
+        UserAddress address = addressDao.getById(addressId);
+        if (address == null) {
+            throw new BizException("地址不存在");
+        }
+        // 先把默认地址重置掉
+        addressDao.resetDefaultAddress();
+        address.setIsDefault(1);
+        addressDao.updateAddress(address);
+    }
+
+
 }

@@ -48,4 +48,24 @@ public class AddressDaoImpl implements AddressDao {
         address.setUpdatedTime(new Date());
         addressMapper.updateByPrimaryKeySelective(address);
     }
+
+    @Override
+    public void deleteById(String addressId) {
+        addressMapper.deleteByPrimaryKey(addressId);
+    }
+
+    @Override
+    public void setDefaultAddress(String addressId) {
+
+    }
+
+    @Override
+    public UserAddress getById(String addressId) {
+        return addressMapper.selectByPrimaryKey(addressId);
+    }
+
+    @Override
+    public void resetDefaultAddress() {
+        addressMapper.resetDefaultAddress(LoginContext.getUserId());
+    }
 }

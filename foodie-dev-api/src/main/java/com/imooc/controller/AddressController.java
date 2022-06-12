@@ -49,13 +49,21 @@ public class AddressController {
 
     @ApiOperation("删除收货地址")
     @PostMapping("/delete")
-    public ResultDTO delete(
+    public ResultDTO<Void> delete(
             @RequestParam String userId,
             @RequestParam String addressId) {
-        return null;
+        addressService.deleteAddress(addressId);
+        return ResultDTO.success();
     }
 
-
+    @ApiOperation("设置默认收货地址")
+    @PostMapping("/setDefalut")
+    public ResultDTO<Void> setDefalut(
+            @RequestParam String userId,
+            @RequestParam String addressId) {
+        addressService.setDefaultAddress(addressId);
+        return ResultDTO.success();
+    }
 
 
 }

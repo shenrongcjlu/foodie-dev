@@ -18,4 +18,7 @@
     <result column="created_time" property="createdTime" jdbcType="TIMESTAMP" />
     <result column="updated_time" property="updatedTime" jdbcType="TIMESTAMP" />
   </resultMap>
+    <update id="resetDefaultAddress">
+      update user_address set is_default = 0 where user_id = #{userId}
+    </update>
 </mapper>

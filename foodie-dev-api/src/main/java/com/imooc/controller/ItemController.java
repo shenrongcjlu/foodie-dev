@@ -5,6 +5,7 @@ import com.imooc.dto.CommentLevelCountsDTO;
 import com.imooc.dto.ItemDetailDTO;
 import com.imooc.dto.PageDTO;
 import com.imooc.dto.request.SearchItemReqDTO;
+import com.imooc.dto.response.ShopCartDTO;
 import com.imooc.service.ItemService;
 import com.imooc.utils.PagedGridResult;
 import io.swagger.annotations.Api;
@@ -13,7 +14,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -82,8 +85,9 @@ public class ItemController {
         return ResultDTO.success(itemService.searchItemsByThirdCategory(query));
     }
 
-//    @GetMapping("/refresh")
-//    public ResultDTO<Void> refresh() {
-//        return ResultDTO.success();
-//    }
+    @ApiOperation("根据商品规则查询商品信息")
+    @GetMapping("/refresh")
+    public ResultDTO<List<ShopCartDTO>> refresh(@RequestParam @NotEmpty List<String> itemSpecIds) {
+        return ResultDTO.success(itemService.listItemsBySpecIds(itemSpecIds));
+    }
 }

@@ -4,6 +4,7 @@ import com.imooc.dto.CommentLevelCountsDTO;
 import com.imooc.dto.ItemDetailDTO;
 import com.imooc.dto.PageDTO;
 import com.imooc.dto.request.SearchItemReqDTO;
+import com.imooc.dto.response.ShopCartDTO;
 import com.imooc.pojo.Items;
 import com.imooc.pojo.ItemsImg;
 import com.imooc.pojo.ItemsParam;
@@ -80,4 +81,11 @@ public interface ItemService {
 
 
     PagedGridResult searchItemsByThirdCategory(SearchItemReqDTO query);
+
+    /**
+     * 刷新购物车
+     * @param specIds
+     * @return
+     */
+    List<ShopCartDTO> listItemsBySpecIds(List<String> specIds);
 }

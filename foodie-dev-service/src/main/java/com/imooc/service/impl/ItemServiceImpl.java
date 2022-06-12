@@ -6,6 +6,7 @@ import com.imooc.dto.CommentLevelCountsDTO;
 import com.imooc.dto.ItemDetailDTO;
 import com.imooc.dto.PageDTO;
 import com.imooc.dto.request.SearchItemReqDTO;
+import com.imooc.dto.response.ShopCartDTO;
 import com.imooc.enums.CommentLevel;
 import com.imooc.pojo.Items;
 import com.imooc.pojo.ItemsImg;
@@ -90,5 +91,10 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public PagedGridResult searchItemsByThirdCategory(SearchItemReqDTO query) {
         return itemDao.searchItemsByThirdCategory(query);
+    }
+
+    @Override
+    public List<ShopCartDTO> listItemsBySpecIds(List<String> specIds) {
+        return itemDao.listItemsBySpecIds(specIds);
     }
 }

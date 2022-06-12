@@ -79,4 +79,23 @@
             </otherwise>
         </choose>
     </select>
+
+    <select id="listItemsBySpecIds" resultType="com.imooc.dto.response.ShopCartDTO">
+        select
+                items.id itemId,
+                items.item_name itemName,
+                ii.url itemImgUrl,
+                its.id specId,
+                its.`name` specName,
+                its.price_discount priceDiscount,
+                its.price_normal priceNormal
+        FROM items_spec its
+        LEFT JOIN items on its.item_id = items.id
+        LEFT JOIN items_img ii on ii.item_id = its.item_id
+        where ii.is_main = 1
+            and its.id in
+            <foreach collection="specIds" item="specId" separator="," open="(" close=")">
+                #{specId}
+            </foreach>
+    </select>
 </mapper>

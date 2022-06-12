@@ -1,25 +1,25 @@
-package com.imooc.pojo;
+package com.imooc.dto.request;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import java.util.Date;
 
+/**
+ * 说明:
+ *
+ * @author 沈荣
+ * @date 2022/6/12 21:09
+ */
 @Data
-@Table(name = "user_address")
-public class UserAddress {
+public class AddressAddReqDTO {
     /**
      * 地址主键id
      */
-    @Id
     private String id;
 
     /**
      * 关联用户id
      */
-    @Column(name = "user_id")
     private String userId;
 
     /**
@@ -60,19 +60,15 @@ public class UserAddress {
     /**
      * 是否默认地址 1:是  0:否
      */
-    @Column(name = "is_default")
     private Integer isDefault;
 
     /**
      * 创建时间
      */
-    @Column(name = "created_time")
     private Date createdTime;
 
     /**
      * 更新时间
      */
-    @Column(name = "updated_time")
     private Date updatedTime;
-
 }

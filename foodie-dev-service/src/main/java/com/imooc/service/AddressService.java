@@ -1,5 +1,6 @@
 package com.imooc.service;
 
+import com.imooc.dto.request.AddressAddReqDTO;
 import com.imooc.pojo.UserAddress;
 
 import java.util.List;
@@ -18,4 +19,10 @@ public interface AddressService {
      * @return
      */
     List<UserAddress> listAddress(String userId);
+
+    /**
+     * 添加地址
+     * @param param
+     */
+    void addAddress(AddressAddReqDTO param);
 }

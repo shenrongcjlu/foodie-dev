@@ -1,6 +1,7 @@
 package com.imooc.service.impl;
 
 import com.imooc.dao.AddressDao;
+import com.imooc.dto.request.AddressAddReqDTO;
 import com.imooc.pojo.UserAddress;
 import com.imooc.service.AddressService;
 import lombok.extern.slf4j.Slf4j;
@@ -25,5 +26,10 @@ public class AddressServiceImpl implements AddressService {
     @Override
     public List<UserAddress> listAddress(String userId) {
         return addressDao.listAddress(userId);
+    }
+
+    @Override
+    public void addAddress(AddressAddReqDTO param) {
+
     }
 }

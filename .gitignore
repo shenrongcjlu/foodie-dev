@@ -19,7 +19,7 @@ settings.xml
 .idea/
 **/*.iml
 **/.lst
-
+**/application.yml
 # Others
 node_modules/
 **/MANIFEST.MF

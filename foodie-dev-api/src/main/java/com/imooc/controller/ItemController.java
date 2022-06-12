@@ -81,4 +81,9 @@ public class ItemController {
         query.setPageSize(pageSize);
         return ResultDTO.success(itemService.searchItemsByThirdCategory(query));
     }
+
+//    @GetMapping("/refresh")
+//    public ResultDTO<Void> refresh() {
+//        return ResultDTO.success();
+//    }
 }

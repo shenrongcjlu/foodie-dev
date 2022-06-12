@@ -3,6 +3,7 @@ package com.imooc.service.impl;
 import com.imooc.LoginContext;
 import com.imooc.dao.AddressDao;
 import com.imooc.dto.request.AddressAddReqDTO;
+import com.imooc.dto.request.AddressUpdateReqDTO;
 import com.imooc.pojo.UserAddress;
 import com.imooc.service.AddressService;
 import lombok.extern.slf4j.Slf4j;
@@ -41,5 +42,13 @@ public class AddressServiceImpl implements AddressService {
             address.setIsDefault(1);
         }
         addressDao.addAddress(address);
+    }
+
+    @Override
+    public void updateAddress(AddressUpdateReqDTO param) {
+        UserAddress address = new UserAddress();
+        BeanUtils.copyProperties(param, address);
+        address.setId(param.getAddressId());
+        addressDao.updateAddress(address);
     }
 }

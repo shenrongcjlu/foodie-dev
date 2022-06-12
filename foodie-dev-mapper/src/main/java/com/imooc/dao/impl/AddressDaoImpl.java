@@ -42,4 +42,10 @@ public class AddressDaoImpl implements AddressDao {
         address.setUpdatedTime(new Date());
         addressMapper.insert(address);
     }
+
+    @Override
+    public void updateAddress(UserAddress address) {
+        address.setUpdatedTime(new Date());
+        addressMapper.updateByPrimaryKeySelective(address);
+    }
 }

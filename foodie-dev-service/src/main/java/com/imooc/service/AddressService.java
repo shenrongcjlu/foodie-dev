@@ -1,6 +1,7 @@
 package com.imooc.service;
 
 import com.imooc.dto.request.AddressAddReqDTO;
+import com.imooc.dto.request.AddressUpdateReqDTO;
 import com.imooc.pojo.UserAddress;
 
 import java.util.List;
@@ -25,4 +26,10 @@ public interface AddressService {
      * @param param
      */
     void addAddress(AddressAddReqDTO param);
+
+    /**
+     * 更新地址
+     * @param param
+     */
+    void updateAddress(AddressUpdateReqDTO param);
 }

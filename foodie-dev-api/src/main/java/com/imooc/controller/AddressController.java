@@ -2,6 +2,7 @@ package com.imooc.controller;
 
 import com.imooc.ResultDTO;
 import com.imooc.dto.request.AddressAddReqDTO;
+import com.imooc.dto.request.AddressUpdateReqDTO;
 import com.imooc.pojo.UserAddress;
 import com.imooc.service.AddressService;
 import io.swagger.annotations.Api;
@@ -36,6 +37,13 @@ public class AddressController {
     @PostMapping("/add")
     public ResultDTO<Void> add(@RequestBody @Valid AddressAddReqDTO param) {
         addressService.addAddress(param);
+        return ResultDTO.success();
+    }
+
+    @ApiOperation("更新地址")
+    @PostMapping("/update")
+    public ResultDTO<Void> update(@RequestBody @Valid AddressUpdateReqDTO param) {
+        addressService.updateAddress(param);
         return ResultDTO.success();
     }
 

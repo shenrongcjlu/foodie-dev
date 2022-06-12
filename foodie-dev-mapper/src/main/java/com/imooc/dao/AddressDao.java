@@ -18,4 +18,10 @@ public interface AddressDao {
      * @param address
      */
     void addAddress(UserAddress address);
+
+    /**
+     * 更新地址
+     * @param address
+     */
+    void updateAddress(UserAddress address);
 }

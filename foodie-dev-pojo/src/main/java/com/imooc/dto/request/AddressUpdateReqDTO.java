@@ -1,6 +1,5 @@
 package com.imooc.dto.request;
 
-import io.swagger.annotations.ApiModel;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
@@ -10,11 +9,13 @@ import javax.validation.constraints.NotBlank;
  * 说明:
  *
  * @author 沈荣
- * @date 2022/6/12 21:09
+ * @date 2022/6/12 21:53
  */
 @Data
-@ApiModel
-public class AddressAddReqDTO {
+public class AddressUpdateReqDTO {
+
+    @NotBlank
+    private String addressId;
 
     /**
      * 收件人姓名

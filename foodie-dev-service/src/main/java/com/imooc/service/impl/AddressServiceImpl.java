@@ -1,11 +1,14 @@
 package com.imooc.service.impl;
 
+import com.imooc.LoginContext;
 import com.imooc.dao.AddressDao;
 import com.imooc.dto.request.AddressAddReqDTO;
 import com.imooc.pojo.UserAddress;
 import com.imooc.service.AddressService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -30,6 +33,13 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     public void addAddress(AddressAddReqDTO param) {
-
+        UserAddress address = new UserAddress();
+        BeanUtils.copyProperties(param, address);
+        List<UserAddress> userAddresses = listAddress(LoginContext.getUserId());
+        if (CollectionUtils.isEmpty(userAddresses)) {
+            // 如果用户没有地址，就地址设置为默认
+            address.setIsDefault(1);
+        }
+        addressDao.addAddress(address);
     }
 }

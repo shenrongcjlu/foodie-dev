@@ -14,6 +14,10 @@ public class LoginContext {
         loginUserId.set(userId);
     }
 
+    public static String getUserId() {
+        return loginUserId.get();
+    }
+
     public static void destroy() {
         loginUserId.remove();
     }

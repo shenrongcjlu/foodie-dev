@@ -12,4 +12,10 @@ import java.util.List;
  */
 public interface AddressDao {
     List<UserAddress> listAddress(String userId);
+
+    /**
+     * 添加地址
+     * @param address
+     */
+    void addAddress(UserAddress address);
 }

@@ -1,6 +1,7 @@
 package com.imooc.controller;
 
 import com.imooc.ResultDTO;
+import com.imooc.dto.request.AddressAddReqDTO;
 import com.imooc.pojo.UserAddress;
 import com.imooc.service.AddressService;
 import io.swagger.annotations.Api;
@@ -8,6 +9,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -28,6 +30,13 @@ public class AddressController {
     @PostMapping("/list")
     public ResultDTO<List<UserAddress>> list(@RequestParam String userId) {
         return ResultDTO.success(addressService.listAddress(userId));
+    }
+
+    @ApiOperation("新增地址")
+    @PostMapping("/add")
+    public ResultDTO<Void> add(@RequestBody @Valid AddressAddReqDTO param) {
+        addressService.addAddress(param);
+        return ResultDTO.success();
     }
 
     @ApiOperation("删除收货地址")

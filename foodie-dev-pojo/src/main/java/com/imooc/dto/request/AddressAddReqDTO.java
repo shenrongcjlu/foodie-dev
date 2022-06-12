@@ -1,8 +1,10 @@
 package com.imooc.dto.request;
 
+import io.swagger.annotations.ApiModel;
 import lombok.Data;
+import org.hibernate.validator.constraints.Length;
 
-import java.util.Date;
+import javax.validation.constraints.NotBlank;
 
 /**
  * 说明:
@@ -11,6 +13,7 @@ import java.util.Date;
  * @date 2022/6/12 21:09
  */
 @Data
+@ApiModel
 public class AddressAddReqDTO {
     /**
      * 地址主键id
@@ -18,57 +21,44 @@ public class AddressAddReqDTO {
     private String id;
 
     /**
-     * 关联用户id
-     */
-    private String userId;
-
-    /**
      * 收件人姓名
      */
+    @NotBlank
     private String receiver;
 
     /**
      * 收件人手机号
      */
+    @NotBlank
+    @Length(min = 11, max = 11)
     private String mobile;
 
     /**
      * 省份
      */
+    @NotBlank
     private String province;
 
     /**
      * 城市
      */
+    @NotBlank
     private String city;
 
     /**
      * 区县
      */
+    @NotBlank
     private String district;
 
     /**
      * 详细地址
      */
+    @NotBlank
     private String detail;
 
     /**
      * 扩展字段
      */
     private String extand;
-
-    /**
-     * 是否默认地址 1:是  0:否
-     */
-    private Integer isDefault;
-
-    /**
-     * 创建时间
-     */
-    private Date createdTime;
-
-    /**
-     * 更新时间
-     */
-    private Date updatedTime;
 }

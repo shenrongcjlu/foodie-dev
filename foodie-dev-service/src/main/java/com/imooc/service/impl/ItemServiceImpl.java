@@ -67,9 +67,9 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public CommentLevelCountsDTO getCommentCounts(String itemId) {
-        Integer goodCommentCount = commentDao.getCommentCount(itemId, CommentLevel.GOOD.type);
-        Integer normalCommentCount = commentDao.getCommentCount(itemId, CommentLevel.NORMAL.type);
-        Integer badCommentCount = commentDao.getCommentCount(itemId, CommentLevel.BAD.type);
+        Integer goodCommentCount = commentDao.getCommentCount(itemId, CommentLevel.GOOD.code);
+        Integer normalCommentCount = commentDao.getCommentCount(itemId, CommentLevel.NORMAL.code);
+        Integer badCommentCount = commentDao.getCommentCount(itemId, CommentLevel.BAD.code);
         CommentLevelCountsDTO commentLevelCountsDTO = new CommentLevelCountsDTO();
         commentLevelCountsDTO.setGoodCounts(goodCommentCount);
         commentLevelCountsDTO.setNormalCounts(normalCommentCount);

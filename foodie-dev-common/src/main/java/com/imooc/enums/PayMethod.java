@@ -6,16 +6,16 @@ import lombok.Getter;
  * @Description: 支付方式 枚举
  */
 @Getter
-public enum PayMethod {
+public enum PayMethod implements IEnum  {
 
 	WEIXIN(1, "微信"),
 	ALIPAY(2, "支付宝");
 
-	public final Integer type;
+	public final Integer code;
 	public final String value;
 
-	PayMethod(Integer type, String value){
-		this.type = type;
+	PayMethod(Integer code, String value){
+		this.code = code;
 		this.value = value;
 	}
 

@@ -32,7 +32,7 @@ public class OrderController {
     @ApiOperation("创建订单")
     @PostMapping("/create")
     public ResultDTO<Void> create(@RequestBody @Valid CreateOrderReqDTO param) {
-//        orderService.createOrder(param);
+        orderService.createOrder(param);
         return ResultDTO.success();
     }
 

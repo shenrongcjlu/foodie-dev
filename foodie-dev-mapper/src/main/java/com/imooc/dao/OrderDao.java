@@ -1,5 +1,7 @@
 package com.imooc.dao;
 
+import com.imooc.pojo.Orders;
+
 /**
  * 说明:
  *
@@ -7,4 +9,10 @@ package com.imooc.dao;
  * @date 2022/6/12 22:46
  */
 public interface OrderDao {
+
+    /**
+     * 插入订单
+     * @param orders
+     */
+    void insert(Orders orders);
 }

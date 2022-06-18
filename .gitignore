@@ -20,6 +20,7 @@ settings.xml
 **/*.iml
 **/.lst
 **/application.yml
+application.yml
 # Others
 node_modules/
 **/MANIFEST.MF

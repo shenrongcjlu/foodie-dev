@@ -29,4 +29,11 @@ public interface UserDao {
      * @return
      */
     Users getUserByNameAndPassword(String userName, String password);
+
+    /**
+     * 根据id获取user
+     * @param userId
+     * @return
+     */
+    Users getById(String userId);
 }

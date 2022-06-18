@@ -47,4 +47,9 @@ public class UserDaoImpl implements UserDao {
         criteria.andEqualTo("password", password);
         return usersMapper.selectOneByExample(example);
     }
+
+    @Override
+    public Users getById(String userId) {
+        return usersMapper.selectByPrimaryKey(userId);
+    }
 }

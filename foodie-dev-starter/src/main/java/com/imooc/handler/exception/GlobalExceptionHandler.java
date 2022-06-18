@@ -20,5 +20,4 @@ public class GlobalExceptionHandler {
     public ResultDTO<String> handleBizException(BizException e) {
         return ResultDTO.fail(e.getMessage());
     }
-
 }

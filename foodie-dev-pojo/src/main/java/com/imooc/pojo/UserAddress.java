@@ -75,4 +75,11 @@ public class UserAddress {
     @Column(name = "updated_time")
     private Date updatedTime;
 
+    public String getAddressDetail() {
+        return province + ""
+                + city + ""
+                + district + ""
+                + detail;
+    }
+
 }

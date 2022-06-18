@@ -1,5 +1,6 @@
 package com.imooc.dto.request;
 
+import com.imooc.enums.PayMethod;
 import lombok.Data;
 
 /**
@@ -13,6 +14,6 @@ public class CreateOrderReqDTO {
     private String userId;
     private String itemSpecIds;
     private String addressId;
-    private String payMethod;
+    private PayMethod payMethod;
     private String leftMsg;
 }

@@ -1,11 +1,13 @@
 package com.imooc.enums;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
  * @Description: 订单状态 枚举
  */
 @Getter
+@AllArgsConstructor
 public enum OrderStatusEnum implements IEnum {
 
 	WAIT_PAY(10, "待付款"),
@@ -14,12 +16,7 @@ public enum OrderStatusEnum implements IEnum {
 	SUCCESS(40, "交易成功"),
 	CLOSE(50, "交易关闭");
 
-	public final Integer code;
-	public final String value;
-
-	OrderStatusEnum(Integer code, String value){
-		this.code = code;
-		this.value = value;
-	}
+	private final int code;
+	private final String value;
 
 }

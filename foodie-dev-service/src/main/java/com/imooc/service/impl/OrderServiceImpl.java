@@ -42,7 +42,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     @Transactional
-    public void createOrder(CreateOrderReqDTO param) {
+    public String createOrder(CreateOrderReqDTO param) {
         Orders orders = new Orders();
         BeanUtils.copyProperties(param, orders);
 
@@ -100,5 +100,7 @@ public class OrderServiceImpl implements OrderService {
         orders.setTotalAmount(totalAmount);
         orders.setRealPayAmount(realmAmount);
         orderDao.update(orders);
+
+        return orders.getId();
     }
 }

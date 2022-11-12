@@ -31,9 +31,9 @@ public class OrderController {
 
     @ApiOperation("创建订单")
     @PostMapping("/create")
-    public ResultDTO<Void> create(@RequestBody @Valid CreateOrderReqDTO param) {
-        orderService.createOrder(param);
-        return ResultDTO.success();
+    public ResultDTO<String> create(@RequestBody @Valid CreateOrderReqDTO param) {
+        String orderId = orderService.createOrder(param);
+        return ResultDTO.success(orderId);
     }
 
 }

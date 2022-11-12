@@ -1,7 +1,9 @@
 package com.imooc.dto.request;
 
-import com.imooc.enums.PayMethod;
 import lombok.Data;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 /**
  * 说明:
@@ -11,9 +13,13 @@ import lombok.Data;
  */
 @Data
 public class CreateOrderReqDTO {
+    @NotBlank
     private String userId;
+    @NotBlank
     private String itemSpecIds;
+    @NotBlank
     private String addressId;
-    private PayMethod payMethod;
+    @NotNull
+    private Integer payMethod;
     private String leftMsg;
 }

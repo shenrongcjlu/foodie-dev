@@ -17,4 +17,12 @@ public interface ItemSpecDao {
      */
     ItemsSpec getById(String itemSpecId);
 
+    /**
+     * 扣减库存
+     * @param itemSpecId
+     * @param buyCounts
+     */
+    int decreaseStock(ItemsSpec itemSpecId, int buyCounts);
+
+    void uddate(ItemsSpec itemsSpec);
 }

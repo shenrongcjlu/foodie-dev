@@ -23,4 +23,14 @@ public class ItemSpecDaoImpl implements ItemSpecDao {
     public ItemsSpec getById(String itemSpecId) {
         return itemsSpecMapper.selectByPrimaryKey(itemSpecId);
     }
+
+    @Override
+    public int decreaseStock(ItemsSpec itemsSpec, int buyCounts) {
+        return itemsSpecMapper.decreaseStock(itemsSpec.getId(), itemsSpec.getStock(), buyCounts);
+    }
+
+    @Override
+    public void uddate(ItemsSpec itemsSpec) {
+        itemsSpecMapper.updateByPrimaryKeySelective(itemsSpec);
+    }
 }

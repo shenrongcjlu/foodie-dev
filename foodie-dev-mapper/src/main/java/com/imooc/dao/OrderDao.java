@@ -15,4 +15,10 @@ public interface OrderDao {
      * @param orders
      */
     void insert(Orders orders);
+
+    /**
+     * 更新订单
+     * @param orders
+     */
+    void update(Orders orders);
 }

@@ -1,4 +1,4 @@
-package com.imooc.service.impl;
+package com.imooc.service.portal.impl;
 
 import com.imooc.LoginContext;
 import com.imooc.dao.AddressDao;
@@ -6,7 +6,7 @@ import com.imooc.dto.request.AddressAddReqDTO;
 import com.imooc.dto.request.AddressUpdateReqDTO;
 import com.imooc.exception.BizException;
 import com.imooc.pojo.UserAddress;
-import com.imooc.service.AddressService;
+import com.imooc.service.portal.AddressService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;

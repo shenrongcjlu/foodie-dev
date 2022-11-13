@@ -4,7 +4,7 @@ import com.imooc.ResultDTO;
 import com.imooc.dto.UserDTO;
 import com.imooc.dto.request.UserCreateRequestDTO;
 import com.imooc.dto.request.UserLoginRequestDTO;
-import com.imooc.service.UserService;
+import com.imooc.service.portal.UserService;
 import com.imooc.utils.CookieUtils;
 import com.imooc.utils.JsonUtils;
 import com.imooc.utils.MD5Utils;

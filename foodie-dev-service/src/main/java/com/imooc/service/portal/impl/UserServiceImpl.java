@@ -1,11 +1,11 @@
-package com.imooc.service.impl;
+package com.imooc.service.portal.impl;
 
 import com.imooc.dao.UserDao;
 import com.imooc.dto.UserDTO;
 import com.imooc.dto.request.UserCreateRequestDTO;
 import com.imooc.enums.Sex;
 import com.imooc.pojo.Users;
-import com.imooc.service.UserService;
+import com.imooc.service.portal.UserService;
 import com.imooc.utils.MD5Utils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

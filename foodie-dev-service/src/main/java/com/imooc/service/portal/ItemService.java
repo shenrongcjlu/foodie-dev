@@ -1,4 +1,4 @@
-package com.imooc.service;
+package com.imooc.service.portal;
 
 import com.imooc.dto.CommentLevelCountsDTO;
 import com.imooc.dto.ItemDetailDTO;

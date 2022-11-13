@@ -1,8 +1,8 @@
-package com.imooc.service.impl;
+package com.imooc.service.portal.impl;
 
 import com.imooc.dao.CarouselDao;
 import com.imooc.pojo.Carousel;
-import com.imooc.service.CarouselService;
+import com.imooc.service.portal.CarouselService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

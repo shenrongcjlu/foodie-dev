@@ -1,4 +1,4 @@
-package com.imooc.service;
+package com.imooc.service.portal;
 
 import com.imooc.dto.request.AddressAddReqDTO;
 import com.imooc.dto.request.AddressUpdateReqDTO;

@@ -1,4 +1,4 @@
-package com.imooc.service;
+package com.imooc.service.portal;
 
 /**
  * 说明:

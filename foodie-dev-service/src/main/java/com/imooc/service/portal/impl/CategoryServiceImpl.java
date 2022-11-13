@@ -1,10 +1,10 @@
-package com.imooc.service.impl;
+package com.imooc.service.portal.impl;
 
 import com.imooc.dao.CategoryDao;
 import com.imooc.dto.NewItemsDTO;
 import com.imooc.dto.response.CategoryDTO;
 import com.imooc.pojo.Category;
-import com.imooc.service.CategoryService;
+import com.imooc.service.portal.CategoryService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

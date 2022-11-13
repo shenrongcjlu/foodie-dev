@@ -1,4 +1,4 @@
-package com.imooc.service.impl;
+package com.imooc.service.portal.impl;
 
 import com.imooc.dao.CommentDao;
 import com.imooc.dao.ItemsDao;
@@ -12,7 +12,7 @@ import com.imooc.pojo.Items;
 import com.imooc.pojo.ItemsImg;
 import com.imooc.pojo.ItemsParam;
 import com.imooc.pojo.ItemsSpec;
-import com.imooc.service.ItemService;
+import com.imooc.service.portal.ItemService;
 import com.imooc.utils.PagedGridResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

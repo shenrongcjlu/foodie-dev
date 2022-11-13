@@ -1,9 +1,9 @@
-package com.imooc.service.impl;
+package com.imooc.service.portal.impl;
 
 import com.imooc.dao.ItemSpecDao;
 import com.imooc.exception.BizException;
 import com.imooc.pojo.ItemsSpec;
-import com.imooc.service.ItemSpecService;
+import com.imooc.service.portal.ItemSpecService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

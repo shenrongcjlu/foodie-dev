@@ -1,6 +1,6 @@
 package com.imooc.task;
 
-import com.imooc.service.OrderService;
+import com.imooc.service.portal.OrderService;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 

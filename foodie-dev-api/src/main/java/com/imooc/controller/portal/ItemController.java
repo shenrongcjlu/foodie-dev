@@ -6,7 +6,7 @@ import com.imooc.dto.ItemDetailDTO;
 import com.imooc.dto.PageDTO;
 import com.imooc.dto.request.SearchItemReqDTO;
 import com.imooc.dto.response.ShopCartDTO;
-import com.imooc.service.ItemService;
+import com.imooc.service.portal.ItemService;
 import com.imooc.utils.PagedGridResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

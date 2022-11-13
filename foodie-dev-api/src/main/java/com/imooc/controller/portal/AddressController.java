@@ -1,4 +1,4 @@
-package com.imooc.controller;
+package com.imooc.controller.portal;
 
 import com.imooc.ResultDTO;
 import com.imooc.dto.request.AddressAddReqDTO;

@@ -23,4 +23,9 @@ public interface OrderService {
      * @return
      */
     OrderStatus getOrderStatus(String orderId);
+
+    /**
+     * 关闭超时订单
+     */
+    void closeTimeoutOrder();
 }

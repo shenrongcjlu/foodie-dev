@@ -2,6 +2,8 @@ package com.imooc.dao;
 
 import com.imooc.pojo.OrderStatus;
 
+import java.util.List;
+
 /**
  * 说明:
  *
@@ -23,4 +25,16 @@ public interface OrderStatusDao {
      */
     OrderStatus getById(String orderId);
 
+    /**
+     * 根据条件获取
+     * @param orderStatus
+     * @return
+     */
+    List<OrderStatus> listByOrder(OrderStatus orderStatus);
+
+    /**
+     * 更新订单状态
+     * @param orderStatus
+     */
+    void update(OrderStatus orderStatus);
 }

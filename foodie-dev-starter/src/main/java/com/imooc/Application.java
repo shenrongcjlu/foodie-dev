@@ -3,6 +3,7 @@ package com.imooc;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
  * 说明
@@ -11,6 +12,7 @@ import org.springframework.context.annotation.ComponentScan;
  * @date 2022/5/21 18:23
  */
 @SpringBootApplication
+@EnableScheduling
 @ComponentScan(basePackages = {"org.n3r.idworker", "com.imooc"})
 public class Application {
     public static void main(String[] args) {

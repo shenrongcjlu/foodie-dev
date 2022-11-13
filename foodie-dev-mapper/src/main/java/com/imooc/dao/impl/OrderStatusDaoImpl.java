@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 说明:
@@ -32,5 +33,16 @@ public class OrderStatusDaoImpl implements OrderStatusDao {
     @Override
     public OrderStatus getById(String orderId) {
         return orderStatusMapper.selectByPrimaryKey(orderId);
+    }
+
+    @Override
+    public List<OrderStatus> listByOrder(OrderStatus orderStatus) {
+        return orderStatusMapper.select(orderStatus);
+    }
+
+    @Override
+    public void update(OrderStatus orderStatus) {
+        orderStatus.setCloseTime(new Date());
+        orderStatusMapper.updateByPrimaryKey(orderStatus);
     }
 }

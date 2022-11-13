@@ -3,14 +3,18 @@ package com.imooc.service.impl;
 import com.imooc.LoginContext;
 import com.imooc.dao.*;
 import com.imooc.dto.request.CreateOrderReqDTO;
+import com.imooc.enums.OrderStatusEnum;
 import com.imooc.pojo.*;
 import com.imooc.service.ItemSpecService;
 import com.imooc.service.OrderService;
+import com.imooc.utils.DateUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.Date;
+import java.util.List;
 
 /**
  * 说明:
@@ -107,5 +111,22 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public OrderStatus getOrderStatus(String orderId) {
         return orderStatusDao.getById(orderId);
+    }
+
+    @Override
+    @Transactional
+    public void closeTimeoutOrder() {
+        OrderStatus orderStatus = new OrderStatus();
+        orderStatus.setOrderStatus(OrderStatusEnum.WAIT_PAY.getCode());
+        List<OrderStatus> orderStatuses = orderStatusDao.listByOrder(orderStatus);
+        orderStatuses.forEach(item -> {
+            Date createdTime = item.getCreatedTime();
+            Date now = new Date();
+            int i = DateUtil.daysBetween(createdTime, now);
+            if (i >= 1) {
+                item.setOrderStatus(OrderStatusEnum.CLOSE.getCode());
+                orderStatusDao.update(item);
+            }
+        });
     }
 }

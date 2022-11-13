@@ -5,10 +5,7 @@ import com.imooc.dto.UserDTO;
 import com.imooc.service.center.CenterUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -27,9 +24,11 @@ public class CenterController {
     private CenterUserService centerUserService;
 
     @ApiOperation("获取用户信息")
-    @PostMapping("/userInfo")
+    @GetMapping("/userInfo")
     public ResultDTO<UserDTO> list(@RequestParam String userId) {
         return ResultDTO.success(centerUserService.getUserInfo(userId));
     }
+
+
 
 }

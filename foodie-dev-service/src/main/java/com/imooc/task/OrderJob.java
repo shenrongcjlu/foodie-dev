@@ -1,7 +1,6 @@
 package com.imooc.task;
 
 import com.imooc.service.portal.OrderService;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -18,7 +17,7 @@ public class OrderJob {
     @Resource
     private OrderService orderService;
 
-    @Scheduled(cron = "0/3 * * * * ?")
+//    @Scheduled(cron = "0/3 * * * * ?")
     public void autoCloseOrder() {
         System.out.println("执行定时任务");
         orderService.closeTimeoutOrder();

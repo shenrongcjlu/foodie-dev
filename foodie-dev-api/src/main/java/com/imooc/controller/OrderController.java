@@ -2,6 +2,7 @@ package com.imooc.controller;
 
 import com.imooc.ResultDTO;
 import com.imooc.dto.request.CreateOrderReqDTO;
+import com.imooc.pojo.OrderStatus;
 import com.imooc.service.OrderService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -34,6 +35,12 @@ public class OrderController {
     public ResultDTO<String> create(@RequestBody @Valid CreateOrderReqDTO param) {
         String orderId = orderService.createOrder(param);
         return ResultDTO.success(orderId);
+    }
+
+    @ApiOperation("轮询支付结果")
+    @PostMapping("/getPaidOrderInfo")
+    public ResultDTO<OrderStatus> getPaidOrderInfo(String orderId) {
+        return ResultDTO.success(orderService.getOrderStatus(orderId));
     }
 
 }

@@ -1,6 +1,7 @@
 package com.imooc.service;
 
 import com.imooc.dto.request.CreateOrderReqDTO;
+import com.imooc.pojo.OrderStatus;
 
 /**
  * 说明:
@@ -15,4 +16,11 @@ public interface OrderService {
      * @param param
      */
     String createOrder(CreateOrderReqDTO param);
+
+    /**
+     * 获取订单状态
+     * @param orderId
+     * @return
+     */
+    OrderStatus getOrderStatus(String orderId);
 }

@@ -10,6 +10,17 @@ import com.imooc.pojo.OrderStatus;
  */
 public interface OrderStatusDao {
 
+    /**
+     * 插入
+     * @param orderStatus
+     */
     void insert(OrderStatus orderStatus);
+
+    /**
+     * 根据id查询
+     * @param orderId
+     * @return
+     */
+    OrderStatus getById(String orderId);
 
 }

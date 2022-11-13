@@ -103,4 +103,9 @@ public class OrderServiceImpl implements OrderService {
 
         return orders.getId();
     }
+
+    @Override
+    public OrderStatus getOrderStatus(String orderId) {
+        return orderStatusDao.getById(orderId);
+    }
 }

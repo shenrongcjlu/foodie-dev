@@ -23,8 +23,14 @@ public class OrderStatusDaoImpl implements OrderStatusDao {
 
     @Override
     public void insert(OrderStatus orderStatus) {
-        orderStatus.setOrderStatus(OrderStatusEnum.WAIT_PAY.getCode());
+        // 为了方便测试，直接状态已付款
+        orderStatus.setOrderStatus(OrderStatusEnum.WAIT_DELIVER.getCode());
         orderStatus.setCreatedTime(new Date());
         orderStatusMapper.insert(orderStatus);
+    }
+
+    @Override
+    public OrderStatus getById(String orderId) {
+        return orderStatusMapper.selectByPrimaryKey(orderId);
     }
 }

@@ -1,6 +1,6 @@
 package com.imooc.pojo;
 
-import com.imooc.dto.UserDTO;
+import com.imooc.portal.dto.UserDTO;
 import lombok.Data;
 import org.springframework.beans.BeanUtils;
 

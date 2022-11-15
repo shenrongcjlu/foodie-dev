@@ -52,4 +52,10 @@ public class UserDaoImpl implements UserDao {
     public Users getById(String userId) {
         return usersMapper.selectByPrimaryKey(userId);
     }
+
+    @Override
+    public void update(Users updateUser) {
+        updateUser.setUpdatedTime(new Date());
+        usersMapper.updateByPrimaryKeySelective(updateUser);
+    }
 }

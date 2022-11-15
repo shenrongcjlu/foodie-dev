@@ -1,7 +1,7 @@
 package com.imooc.controller.portal;
 
 import com.imooc.ResultDTO;
-import com.imooc.dto.request.CreateOrderReqDTO;
+import com.imooc.portal.dto.request.CreateOrderReqDTO;
 import com.imooc.pojo.OrderStatus;
 import com.imooc.service.portal.OrderService;
 import io.swagger.annotations.Api;

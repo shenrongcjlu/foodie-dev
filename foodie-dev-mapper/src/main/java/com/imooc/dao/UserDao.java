@@ -36,4 +36,10 @@ public interface UserDao {
      * @return
      */
     Users getById(String userId);
+
+    /**
+     * 更新
+     * @param param
+     */
+    void update(Users param);
 }

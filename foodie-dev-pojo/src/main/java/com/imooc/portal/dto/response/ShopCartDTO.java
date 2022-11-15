@@ -1,4 +1,4 @@
-package com.imooc.dto.request;
+package com.imooc.portal.dto.response;
 
 import lombok.Data;
 
@@ -9,15 +9,13 @@ import lombok.Data;
  * @date 2022/6/12 17:30
  */
 @Data
-public class ShopCatAddReqDTO {
+public class ShopCartDTO {
 
     private String itemId;
-
     private String itemImgUrl;
     private String itemName;
     private String specId;
     private String specName;
-    private Integer buyCounts;
     private String priceDiscount;
     private String priceNormal;
 

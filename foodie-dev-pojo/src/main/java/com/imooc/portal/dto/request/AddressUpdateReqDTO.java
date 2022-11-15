@@ -1,4 +1,4 @@
-package com.imooc.dto.request;
+package com.imooc.portal.dto.request;
 
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;

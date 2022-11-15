@@ -1,8 +1,8 @@
 package com.imooc.service.portal.impl;
 
 import com.imooc.dao.UserDao;
-import com.imooc.dto.UserDTO;
-import com.imooc.dto.request.UserCreateRequestDTO;
+import com.imooc.portal.dto.UserDTO;
+import com.imooc.portal.dto.request.UserCreateRequestDTO;
 import com.imooc.enums.Sex;
 import com.imooc.pojo.Users;
 import com.imooc.service.portal.UserService;

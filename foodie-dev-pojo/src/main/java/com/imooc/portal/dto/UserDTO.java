@@ -1,4 +1,4 @@
-package com.imooc.dto;
+package com.imooc.portal.dto;
 
 import lombok.Data;
 
@@ -34,5 +34,10 @@ public class UserDTO {
      * 性别 性别 1:男  0:女  2:保密
      */
     private Integer sex;
+
+    /**
+     * 手机号 手机号
+     */
+    private String mobile;
 
 }

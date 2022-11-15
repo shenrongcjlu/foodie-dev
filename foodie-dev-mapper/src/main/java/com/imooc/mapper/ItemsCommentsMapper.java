@@ -1,6 +1,6 @@
 package com.imooc.mapper;
 
-import com.imooc.dto.CommentDTO;
+import com.imooc.portal.dto.CommentDTO;
 import com.imooc.my.mapper.MyMapper;
 import com.imooc.pojo.ItemsComments;
 import org.apache.ibatis.annotations.Mapper;

@@ -1,6 +1,6 @@
-package com.imooc.dto.request;
+package com.imooc.portal.dto.request;
 
-import com.imooc.dto.PageDTO;
+import com.imooc.portal.dto.PageDTO;
 import lombok.Data;
 
 /**

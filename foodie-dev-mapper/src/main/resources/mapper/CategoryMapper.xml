@@ -12,12 +12,12 @@
     <result column="bg_color" property="bgColor" jdbcType="VARCHAR" />
   </resultMap>
 
-  <resultMap id="CategoryDTO" type="com.imooc.dto.response.CategoryDTO" >
+  <resultMap id="CategoryDTO" type="com.imooc.portal.dto.response.CategoryDTO" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="type" property="type" jdbcType="INTEGER" />
     <result column="fatherId" property="fatherId" jdbcType="INTEGER" />
-    <collection property="subCatList" ofType="com.imooc.dto.response.SubCategoryDTO">
+    <collection property="subCatList" ofType="com.imooc.portal.dto.response.SubCategoryDTO">
       <id column="subId" property="subId" jdbcType="INTEGER" />
       <result column="subName" property="subName" jdbcType="VARCHAR" />
       <result column="subType" property="subType" jdbcType="INTEGER" />
@@ -25,13 +25,13 @@
     </collection>
   </resultMap>
 
-    <resultMap id="NewItemsDTO" type="com.imooc.dto.NewItemsDTO" >
+    <resultMap id="NewItemsDTO" type="com.imooc.portal.dto.NewItemsDTO" >
         <id column="rootCatId" property="rootCatId" jdbcType="INTEGER" />
         <result column="rootCatName" property="rootCatName" jdbcType="VARCHAR" />
         <result column="slogan" property="slogan" jdbcType="VARCHAR" />
         <result column="catImage" property="catImage" jdbcType="VARCHAR" />
         <result column="bgColor" property="bgColor" jdbcType="VARCHAR" />
-        <collection property="simpleItemList" ofType="com.imooc.dto.SimpleItemDTO">
+        <collection property="simpleItemList" ofType="com.imooc.portal.dto.SimpleItemDTO">
             <id column="itemId" property="itemId" jdbcType="INTEGER" />
             <result column="itemName" property="itemName" jdbcType="VARCHAR" />
             <result column="itemUrl" property="itemUrl" jdbcType="VARCHAR" />

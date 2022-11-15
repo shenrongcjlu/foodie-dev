@@ -1,11 +1,11 @@
 package com.imooc.controller.portal;
 
 import com.imooc.ResultDTO;
-import com.imooc.dto.CommentLevelCountsDTO;
-import com.imooc.dto.ItemDetailDTO;
-import com.imooc.dto.PageDTO;
-import com.imooc.dto.request.SearchItemReqDTO;
-import com.imooc.dto.response.ShopCartDTO;
+import com.imooc.portal.dto.CommentLevelCountsDTO;
+import com.imooc.portal.dto.ItemDetailDTO;
+import com.imooc.portal.dto.PageDTO;
+import com.imooc.portal.dto.request.SearchItemReqDTO;
+import com.imooc.portal.dto.response.ShopCartDTO;
 import com.imooc.service.portal.ItemService;
 import com.imooc.utils.PagedGridResult;
 import io.swagger.annotations.Api;

@@ -1,8 +1,8 @@
 package com.imooc.mapper;
 
-import com.imooc.dto.request.SearchItemReqDTO;
-import com.imooc.dto.response.SearchItemRespDTO;
-import com.imooc.dto.response.ShopCartDTO;
+import com.imooc.portal.dto.request.SearchItemReqDTO;
+import com.imooc.portal.dto.response.SearchItemRespDTO;
+import com.imooc.portal.dto.response.ShopCartDTO;
 import com.imooc.my.mapper.MyMapper;
 import com.imooc.pojo.Items;
 import org.apache.ibatis.annotations.Mapper;

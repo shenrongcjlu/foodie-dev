@@ -1,9 +1,9 @@
 package com.imooc.controller.portal;
 
 import com.imooc.ResultDTO;
-import com.imooc.dto.UserDTO;
-import com.imooc.dto.request.UserCreateRequestDTO;
-import com.imooc.dto.request.UserLoginRequestDTO;
+import com.imooc.portal.dto.UserDTO;
+import com.imooc.portal.dto.request.UserCreateRequestDTO;
+import com.imooc.portal.dto.request.UserLoginRequestDTO;
 import com.imooc.service.portal.UserService;
 import com.imooc.utils.CookieUtils;
 import com.imooc.utils.JsonUtils;

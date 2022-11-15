@@ -1,8 +1,8 @@
 package com.imooc.controller.portal;
 
 import com.imooc.ResultDTO;
-import com.imooc.dto.NewItemsDTO;
-import com.imooc.dto.response.CategoryDTO;
+import com.imooc.portal.dto.NewItemsDTO;
+import com.imooc.portal.dto.response.CategoryDTO;
 import com.imooc.pojo.Carousel;
 import com.imooc.pojo.Category;
 import com.imooc.service.portal.CarouselService;

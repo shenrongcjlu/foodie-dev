@@ -2,7 +2,7 @@ package com.imooc.service.portal.impl;
 
 import com.imooc.LoginContext;
 import com.imooc.dao.*;
-import com.imooc.dto.request.CreateOrderReqDTO;
+import com.imooc.portal.dto.request.CreateOrderReqDTO;
 import com.imooc.enums.OrderStatusEnum;
 import com.imooc.pojo.*;
 import com.imooc.service.portal.ItemSpecService;

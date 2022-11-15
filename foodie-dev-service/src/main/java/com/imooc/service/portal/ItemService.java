@@ -1,10 +1,10 @@
 package com.imooc.service.portal;
 
-import com.imooc.dto.CommentLevelCountsDTO;
-import com.imooc.dto.ItemDetailDTO;
-import com.imooc.dto.PageDTO;
-import com.imooc.dto.request.SearchItemReqDTO;
-import com.imooc.dto.response.ShopCartDTO;
+import com.imooc.portal.dto.CommentLevelCountsDTO;
+import com.imooc.portal.dto.ItemDetailDTO;
+import com.imooc.portal.dto.PageDTO;
+import com.imooc.portal.dto.request.SearchItemReqDTO;
+import com.imooc.portal.dto.response.ShopCartDTO;
 import com.imooc.pojo.Items;
 import com.imooc.pojo.ItemsImg;
 import com.imooc.pojo.ItemsParam;

@@ -17,7 +17,7 @@
     <result column="updated_time" property="updatedTime" jdbcType="TIMESTAMP" />
   </resultMap>
 
-  <select id="listItemComments" resultType="com.imooc.dto.CommentDTO">
+  <select id="listItemComments" resultType="com.imooc.portal.dto.CommentDTO">
     select
         ic.comment_level as commentLevel,
         ic.content as content,

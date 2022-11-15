@@ -1,7 +1,7 @@
 package com.imooc.service.portal;
 
-import com.imooc.dto.request.AddressAddReqDTO;
-import com.imooc.dto.request.AddressUpdateReqDTO;
+import com.imooc.portal.dto.request.AddressAddReqDTO;
+import com.imooc.portal.dto.request.AddressUpdateReqDTO;
 import com.imooc.pojo.UserAddress;
 
 import java.util.List;

@@ -16,7 +16,7 @@
     <result column="content" property="content" jdbcType="LONGVARCHAR" />
   </resultMap>
 
-  <select id="searchItems" resultType="com.imooc.dto.response.SearchItemRespDTO">
+  <select id="searchItems" resultType="com.imooc.portal.dto.response.SearchItemRespDTO">
     SELECT
      i.id itemId,
      i.item_name itemName,
@@ -49,7 +49,7 @@
      </choose>
   </select>
 
-    <select id="searchItemsByThirdCategory" resultType="com.imooc.dto.response.SearchItemRespDTO">
+    <select id="searchItemsByThirdCategory" resultType="com.imooc.portal.dto.response.SearchItemRespDTO">
         SELECT
         i.id itemId,
         i.item_name itemName,
@@ -80,7 +80,7 @@
         </choose>
     </select>
 
-    <select id="listItemsBySpecIds" resultType="com.imooc.dto.response.ShopCartDTO">
+    <select id="listItemsBySpecIds" resultType="com.imooc.portal.dto.response.ShopCartDTO">
         select
                 items.id itemId,
                 items.item_name itemName,

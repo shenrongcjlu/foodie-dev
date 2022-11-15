@@ -2,8 +2,8 @@ package com.imooc.dao.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.imooc.dao.ItemsDao;
-import com.imooc.dto.request.SearchItemReqDTO;
-import com.imooc.dto.response.ShopCartDTO;
+import com.imooc.portal.dto.request.SearchItemReqDTO;
+import com.imooc.portal.dto.response.ShopCartDTO;
 import com.imooc.mapper.ItemsImgMapper;
 import com.imooc.mapper.ItemsMapper;
 import com.imooc.mapper.ItemsParamMapper;

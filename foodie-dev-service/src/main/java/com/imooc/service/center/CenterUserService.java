@@ -1,6 +1,7 @@
 package com.imooc.service.center;
 
-import com.imooc.dto.UserDTO;
+import com.imooc.center.dto.request.UserUpdateRequestDTO;
+import com.imooc.portal.dto.UserDTO;
 
 /**
  * 说明：
@@ -17,4 +18,10 @@ public interface CenterUserService {
      */
     UserDTO getUserInfo(String userId);
 
+    /**
+     * 修改用户信息
+     * @param param
+     * @return
+     */
+    UserDTO updateUserInfo(UserUpdateRequestDTO param);
 }

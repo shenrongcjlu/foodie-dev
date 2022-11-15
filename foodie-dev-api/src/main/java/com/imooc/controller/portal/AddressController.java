@@ -1,8 +1,8 @@
 package com.imooc.controller.portal;
 
 import com.imooc.ResultDTO;
-import com.imooc.dto.request.AddressAddReqDTO;
-import com.imooc.dto.request.AddressUpdateReqDTO;
+import com.imooc.portal.dto.request.AddressAddReqDTO;
+import com.imooc.portal.dto.request.AddressUpdateReqDTO;
 import com.imooc.pojo.UserAddress;
 import com.imooc.service.portal.AddressService;
 import io.swagger.annotations.Api;

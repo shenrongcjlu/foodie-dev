@@ -1,7 +1,7 @@
 package com.imooc.controller.portal;
 
 import com.imooc.ResultDTO;
-import com.imooc.dto.request.ShopCatAddReqDTO;
+import com.imooc.portal.dto.request.ShopCatAddReqDTO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;

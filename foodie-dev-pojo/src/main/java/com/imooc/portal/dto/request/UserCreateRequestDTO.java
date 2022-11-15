@@ -1,4 +1,4 @@
-package com.imooc.dto.request;
+package com.imooc.portal.dto.request;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

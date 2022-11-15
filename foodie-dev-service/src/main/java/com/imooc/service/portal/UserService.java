@@ -1,7 +1,7 @@
 package com.imooc.service.portal;
 
-import com.imooc.dto.UserDTO;
-import com.imooc.dto.request.UserCreateRequestDTO;
+import com.imooc.portal.dto.UserDTO;
+import com.imooc.portal.dto.request.UserCreateRequestDTO;
 
 /**
  * 说明

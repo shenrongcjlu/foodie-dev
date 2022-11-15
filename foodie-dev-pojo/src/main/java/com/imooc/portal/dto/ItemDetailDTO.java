@@ -1,4 +1,4 @@
-package com.imooc.dto;
+package com.imooc.portal.dto;
 
 import com.imooc.pojo.Items;
 import com.imooc.pojo.ItemsImg;

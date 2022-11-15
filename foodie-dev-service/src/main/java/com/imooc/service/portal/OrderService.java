@@ -1,6 +1,6 @@
 package com.imooc.service.portal;
 
-import com.imooc.dto.request.CreateOrderReqDTO;
+import com.imooc.portal.dto.request.CreateOrderReqDTO;
 import com.imooc.pojo.OrderStatus;
 
 /**

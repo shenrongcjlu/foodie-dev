@@ -1,4 +1,4 @@
-package com.imooc.dto.response;
+package com.imooc.portal.dto.response;
 
 import lombok.Data;
 

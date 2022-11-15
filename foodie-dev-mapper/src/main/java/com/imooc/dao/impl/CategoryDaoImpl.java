@@ -1,8 +1,8 @@
 package com.imooc.dao.impl;
 
 import com.imooc.dao.CategoryDao;
-import com.imooc.dto.NewItemsDTO;
-import com.imooc.dto.response.CategoryDTO;
+import com.imooc.portal.dto.NewItemsDTO;
+import com.imooc.portal.dto.response.CategoryDTO;
 import com.imooc.mapper.CategoryMapper;
 import com.imooc.pojo.Category;
 import org.springframework.stereotype.Repository;

@@ -1,7 +1,7 @@
 package com.imooc.controller.center;
 
 import com.imooc.ResultDTO;
-import com.imooc.dto.UserDTO;
+import com.imooc.portal.dto.UserDTO;
 import com.imooc.service.center.CenterUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

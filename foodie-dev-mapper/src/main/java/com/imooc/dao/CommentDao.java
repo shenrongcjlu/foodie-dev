@@ -1,6 +1,6 @@
 package com.imooc.dao;
 
-import com.imooc.dto.PageDTO;
+import com.imooc.portal.dto.PageDTO;
 import com.imooc.utils.PagedGridResult;
 
 /**

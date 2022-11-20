@@ -9,6 +9,8 @@ import com.imooc.utils.CookieUtils;
 import com.imooc.utils.JsonUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +21,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
+import java.io.FileOutputStream;
 
 /**
  * 说明:
@@ -29,12 +32,11 @@ import java.io.File;
 @Api(tags = "用户中心")
 @RestController
 @RequestMapping("/userInfo")
+@Slf4j
 public class CenterUserController {
 
-    private static final String IMAGE_USER_FACE_LOCATION = File.separator + "workspace"
-            + File.separator + "images"
-            + File.separator + "foodie"
-            + File.separator + "faces";
+    @Value("${file.imageUserFaceLocation}")
+    private String facePath;
 
     @Resource
     private CenterUserService centerUserService;
@@ -50,7 +52,22 @@ public class CenterUserController {
     @ApiOperation("上传用户头像")
     @PostMapping("/uploadFace")
     public ResultDTO<Void> uploadFace(MultipartFile file, HttpServletRequest request, HttpServletResponse response) {
-        String faceFilePath = IMAGE_USER_FACE_LOCATION + File.separator + LoginContext.getUserId();
+        String faceFilePath = facePath + File.separator + LoginContext.getUserId();
+        // 进行文件上传
+        String fileName = "face_" + LoginContext.getUserId() + "_" + file.getOriginalFilename();
+        File outFile = new File(faceFilePath + File.separator + fileName);
+        try {
+            if (outFile.getParentFile() != null) {
+                outFile.getParentFile().mkdirs();
+            }
+            FileOutputStream fos = new FileOutputStream(outFile);
+            fos.write(file.getBytes());
+            fos.flush();
+            fos.close();
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+            return ResultDTO.fail("上传文件失败");
+        }
         return ResultDTO.success();
     }
 

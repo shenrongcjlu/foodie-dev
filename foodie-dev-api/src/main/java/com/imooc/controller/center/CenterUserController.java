@@ -37,6 +37,8 @@ public class CenterUserController {
 
     @Value("${file.imageUserFaceLocation}")
     private String facePath;
+    @Value("${file.imageServerUrl}")
+    private String imageServerUrl;
 
     @Resource
     private CenterUserService centerUserService;
@@ -51,7 +53,7 @@ public class CenterUserController {
 
     @ApiOperation("上传用户头像")
     @PostMapping("/uploadFace")
-    public ResultDTO<Void> uploadFace(MultipartFile file, HttpServletRequest request, HttpServletResponse response) {
+    public ResultDTO<UserDTO> uploadFace(MultipartFile file, HttpServletRequest request, HttpServletResponse response) {
         String faceFilePath = facePath + File.separator + LoginContext.getUserId();
         // 进行文件上传
         String fileName = "face_" + LoginContext.getUserId() + "_" + file.getOriginalFilename();
@@ -68,7 +70,11 @@ public class CenterUserController {
             log.error(e.getMessage(), e);
             return ResultDTO.fail("上传文件失败");
         }
-        return ResultDTO.success();
+        String faceUrl = imageServerUrl + LoginContext.getUserId() + "/" + fileName + "?timestamp=" + System.currentTimeMillis();
+        UserDTO userDTO = centerUserService.updateUserFace(faceUrl);
+        // 清除缓存
+        CookieUtils.setCookie(request, response, "user", JsonUtils.objectToJson(userDTO), true);
+        return ResultDTO.success(userDTO);
     }
 
 }

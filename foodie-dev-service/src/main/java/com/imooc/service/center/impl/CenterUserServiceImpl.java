@@ -44,9 +44,11 @@ public class CenterUserServiceImpl implements CenterUserService {
     }
 
     @Override
+    @Transactional
     public UserDTO updateUserFace(String faceUrl) {
-        Users user = userDao.getById("file:");
-
-        return null;
+        Users user = userDao.getById(LoginContext.getUserId());
+        user.setFace(faceUrl);
+        userDao.update(user);
+        return getUserInfo(LoginContext.getUserId());
     }
 }

@@ -2,8 +2,6 @@ package com.imooc.dao.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.imooc.dao.ItemsDao;
-import com.imooc.portal.dto.request.SearchItemReqDTO;
-import com.imooc.portal.dto.response.ShopCartDTO;
 import com.imooc.mapper.ItemsImgMapper;
 import com.imooc.mapper.ItemsMapper;
 import com.imooc.mapper.ItemsParamMapper;
@@ -12,6 +10,9 @@ import com.imooc.pojo.Items;
 import com.imooc.pojo.ItemsImg;
 import com.imooc.pojo.ItemsParam;
 import com.imooc.pojo.ItemsSpec;
+import com.imooc.portal.dto.request.SearchItemReqDTO;
+import com.imooc.portal.dto.response.SearchItemRespDTO;
+import com.imooc.portal.dto.response.ShopCartDTO;
 import com.imooc.utils.PageUtil;
 import com.imooc.utils.PagedGridResult;
 import org.springframework.stereotype.Repository;
@@ -67,15 +68,15 @@ public class ItemDaoImpl implements ItemsDao {
     }
 
     @Override
-    public PagedGridResult searchItems(SearchItemReqDTO query) {
+    public PagedGridResult<SearchItemRespDTO> searchItems(SearchItemReqDTO query) {
         PageHelper.startPage(query.getPage(), query.getPageSize());
-        return PageUtil.getPageResult(itemsMapper.searchItems(query));
+        return PageUtil.getPageResult(itemsMapper.searchItems(query), query.getPage());
     }
 
     @Override
-    public PagedGridResult searchItemsByThirdCategory(SearchItemReqDTO query) {
+    public PagedGridResult<SearchItemRespDTO> searchItemsByThirdCategory(SearchItemReqDTO query) {
         PageHelper.startPage(query.getPage(), query.getPageSize());
-        return PageUtil.getPageResult(itemsMapper.searchItemsByThirdCategory(query));
+        return PageUtil.getPageResult(itemsMapper.searchItemsByThirdCategory(query), query.getPage());
     }
 
     @Override

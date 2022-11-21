@@ -1,5 +1,6 @@
 package com.imooc.dao.impl;
 
+import com.imooc.center.dto.MyOrderDTO;
 import com.imooc.dao.OrderDao;
 import com.imooc.enums.YesOrNo;
 import com.imooc.mapper.OrdersMapper;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 说明:
@@ -38,5 +40,10 @@ public class OrderDaoImpl implements OrderDao {
     @Override
     public void update(Orders orders) {
         ordersMapper.updateByPrimaryKeySelective(orders);
+    }
+
+    @Override
+    public List<MyOrderDTO> listUserOrders(String userId, Integer orderStatus) {
+        return ordersMapper.queryMyOrders(userId, orderStatus);
     }
 }

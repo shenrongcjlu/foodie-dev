@@ -11,10 +11,10 @@ import java.util.List;
  * @date: 2022/6/5 21:17
  */
 public class PageUtil {
-    public static <T> PagedGridResult getPageResult(List<T> data) {
+    public static <T> PagedGridResult getPageResult(List<T> data, Integer page) {
         PageInfo<T> pageInfo = new PageInfo(data);
         PagedGridResult gridResult = new PagedGridResult();
-        gridResult.setPage(pageInfo.getPageNum());
+        gridResult.setPage(page);
         gridResult.setRows(data);
         gridResult.setTotal(pageInfo.getPages());
         gridResult.setRecords(pageInfo.getTotal());

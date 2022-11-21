@@ -1,11 +1,12 @@
 package com.imooc.dao;
 
-import com.imooc.portal.dto.request.SearchItemReqDTO;
-import com.imooc.portal.dto.response.ShopCartDTO;
 import com.imooc.pojo.Items;
 import com.imooc.pojo.ItemsImg;
 import com.imooc.pojo.ItemsParam;
 import com.imooc.pojo.ItemsSpec;
+import com.imooc.portal.dto.request.SearchItemReqDTO;
+import com.imooc.portal.dto.response.SearchItemRespDTO;
+import com.imooc.portal.dto.response.ShopCartDTO;
 import com.imooc.utils.PagedGridResult;
 
 import java.util.List;
@@ -55,9 +56,9 @@ public interface ItemsDao {
      *
      * @param query
      */
-    PagedGridResult searchItems(SearchItemReqDTO query);
+    PagedGridResult<SearchItemRespDTO> searchItems(SearchItemReqDTO query);
 
-    PagedGridResult searchItemsByThirdCategory(SearchItemReqDTO query);
+    PagedGridResult<SearchItemRespDTO> searchItemsByThirdCategory(SearchItemReqDTO query);
 
     /**
      * 查询商品参数

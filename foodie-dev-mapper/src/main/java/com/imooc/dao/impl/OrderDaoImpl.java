@@ -49,4 +49,9 @@ public class OrderDaoImpl implements OrderDao {
     public List<MyOrderDTO> listUserOrders(String userId, Integer orderStatus) {
         return ordersMapper.queryMyOrders(userId, orderStatus);
     }
+
+    @Override
+    public Integer countOrderByStatus(String userId, Integer status) {
+        return ordersMapper.countOrderByStatus(userId, status);
+    }
 }

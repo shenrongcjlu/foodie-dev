@@ -80,4 +80,16 @@
       where
         oi.order_id = #{orderId}
   </select>
+
+  <select id="countOrderByStatus" resultType="integer">
+      select
+        count(*)
+      from
+        orders o
+      left join order_status os on o.id = os.order_id
+      where
+        o.user_id = #{userId}
+        and os.order_status = #{status}
+        and o.is_comment = 0
+  </select>
 </mapper>

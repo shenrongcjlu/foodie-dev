@@ -1,6 +1,7 @@
 package com.imooc.service.center;
 
 import com.imooc.center.dto.MyOrderDTO;
+import com.imooc.center.dto.response.UserOrderCountsRespDTO;
 import com.imooc.utils.PagedGridResult;
 
 /**
@@ -31,4 +32,10 @@ public interface CenterOrderService {
      * @param orderId
      */
     void delete(String orderId);
+
+    /**
+     * 查询用户不同状态订单的数量
+     * @return
+     */
+    UserOrderCountsRespDTO getUserOrderCounts();
 }

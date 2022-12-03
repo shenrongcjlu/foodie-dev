@@ -2,6 +2,7 @@ package com.imooc.dao;
 
 import com.imooc.center.dto.MyOrderDTO;
 import com.imooc.pojo.Orders;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -32,5 +33,11 @@ public interface OrderDao {
      * @return
      */
     List<MyOrderDTO> listUserOrders(String userId, Integer orderStatus);
+
+    /**
+     * 查询状态下订单
+     * @return
+     */
+    Integer countOrderByStatus(@Param("userId") String userId, @Param("status") Integer status);
 
 }

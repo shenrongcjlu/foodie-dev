@@ -3,6 +3,7 @@ package com.imooc.service.center.impl;
 import com.github.pagehelper.PageHelper;
 import com.imooc.LoginContext;
 import com.imooc.center.dto.MyOrderDTO;
+import com.imooc.center.dto.response.UserOrderCountsRespDTO;
 import com.imooc.dao.OrderDao;
 import com.imooc.dao.OrderStatusDao;
 import com.imooc.enums.OrderStatusEnum;
@@ -59,5 +60,15 @@ public class CenterOrderServiceImpl implements CenterOrderService {
         orderStatus.setOrderStatus(OrderStatusEnum.SUCCESS.getCode());
         orderStatus.setCloseTime(new Date());
         orderStatusDao.update(orderStatus);
+    }
+
+    @Override
+    public UserOrderCountsRespDTO getUserOrderCounts() {
+        UserOrderCountsRespDTO respDTO = new UserOrderCountsRespDTO();
+        respDTO.setWaitPayCounts(orderDao.countOrderByStatus(LoginContext.getUserId(), OrderStatusEnum.WAIT_PAY.getCode()));
+        respDTO.setWaitDeliverCounts(orderDao.countOrderByStatus(LoginContext.getUserId(), OrderStatusEnum.WAIT_DELIVER.getCode()));
+        respDTO.setWaitReceiveCounts(orderDao.countOrderByStatus(LoginContext.getUserId(), OrderStatusEnum.WAIT_RECEIVE.getCode()));
+        respDTO.setWaitCommentCounts(orderDao.countOrderByStatus(LoginContext.getUserId(), OrderStatusEnum.SUCCESS.getCode()));
+        return respDTO;
     }
 }

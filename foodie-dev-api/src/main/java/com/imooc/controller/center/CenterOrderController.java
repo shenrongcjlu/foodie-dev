@@ -2,6 +2,7 @@ package com.imooc.controller.center;
 
 import com.imooc.ResultDTO;
 import com.imooc.center.dto.MyOrderDTO;
+import com.imooc.center.dto.response.UserOrderCountsRespDTO;
 import com.imooc.service.center.CenterOrderService;
 import com.imooc.utils.PagedGridResult;
 import io.swagger.annotations.Api;
@@ -42,5 +43,11 @@ public class CenterOrderController {
     public ResultDTO<PagedGridResult<MyOrderDTO>> delete(@RequestParam String orderId) {
         centerOrderService.delete(orderId);
         return ResultDTO.success();
+    }
+
+    @ApiOperation("查询状态下订单数量")
+    @PostMapping("/statusCounts")
+    public ResultDTO<UserOrderCountsRespDTO> statusCounts() {
+        return ResultDTO.success(centerOrderService.getUserOrderCounts());
     }
 }

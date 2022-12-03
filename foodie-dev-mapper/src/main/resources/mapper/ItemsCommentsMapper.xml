@@ -45,4 +45,6 @@
     where
         ic.user_id = #{userId}
   </select>
+
+
 </mapper>

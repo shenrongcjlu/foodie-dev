@@ -4,7 +4,9 @@ import com.github.pagehelper.PageHelper;
 import com.imooc.LoginContext;
 import com.imooc.center.dto.MyOrderDTO;
 import com.imooc.dao.OrderDao;
+import com.imooc.dao.OrderStatusDao;
 import com.imooc.enums.OrderStatusEnum;
+import com.imooc.pojo.OrderStatus;
 import com.imooc.service.center.CenterOrderService;
 import com.imooc.utils.PageUtil;
 import com.imooc.utils.PagedGridResult;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.Date;
 
 /**
  * 说明:
@@ -26,6 +29,8 @@ public class CenterOrderServiceImpl implements CenterOrderService {
 
     @Resource
     private OrderDao orderDao;
+    @Resource
+    private OrderStatusDao orderStatusDao;
 
     @Override
     public PagedGridResult<MyOrderDTO> queryMyOrders(Integer orderStatus, Integer pageNo, Integer pageSize) {
@@ -39,11 +44,20 @@ public class CenterOrderServiceImpl implements CenterOrderService {
     @Override
     @Transactional
     public void confirmReceive(String orderId) {
-        orderDao.updateStatus(orderId, OrderStatusEnum.SUCCESS.getCode());
+        OrderStatus orderStatus = new OrderStatus();
+        orderStatus.setOrderId(orderId);
+        orderStatus.setOrderStatus(OrderStatusEnum.SUCCESS.getCode());
+        orderStatus.setSuccessTime(new Date());
+        orderStatusDao.update(orderStatus);
     }
 
     @Override
+    @Transactional
     public void delete(String orderId) {
-        orderDao.updateStatus(orderId, OrderStatusEnum.CLOSE.getCode());
+        OrderStatus orderStatus = new OrderStatus();
+        orderStatus.setOrderId(orderId);
+        orderStatus.setOrderStatus(OrderStatusEnum.SUCCESS.getCode());
+        orderStatus.setCloseTime(new Date());
+        orderStatusDao.update(orderStatus);
     }
 }

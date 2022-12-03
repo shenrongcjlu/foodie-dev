@@ -4,11 +4,13 @@ import com.github.pagehelper.PageHelper;
 import com.imooc.LoginContext;
 import com.imooc.center.dto.MyOrderDTO;
 import com.imooc.dao.OrderDao;
+import com.imooc.enums.OrderStatusEnum;
 import com.imooc.service.center.CenterOrderService;
 import com.imooc.utils.PageUtil;
 import com.imooc.utils.PagedGridResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 
@@ -32,5 +34,16 @@ public class CenterOrderServiceImpl implements CenterOrderService {
         return PageUtil.getPageResult(
                 orderDao.listUserOrders(LoginContext.getUserId(), orderStatus),
                 pageNo);
+    }
+
+    @Override
+    @Transactional
+    public void confirmReceive(String orderId) {
+        orderDao.updateStatus(orderId, OrderStatusEnum.SUCCESS.getCode());
+    }
+
+    @Override
+    public void delete(String orderId) {
+        orderDao.updateStatus(orderId, OrderStatusEnum.CLOSE.getCode());
     }
 }

@@ -30,4 +30,17 @@ public class CenterOrderController {
         return ResultDTO.success(centerOrderService.queryMyOrders(orderStatus, page, pageSize));
     }
 
+    @ApiOperation("确认收货")
+    @PostMapping("/confirmReceive")
+    public ResultDTO<PagedGridResult<MyOrderDTO>> confirmReceive(@RequestParam String orderId) {
+        centerOrderService.confirmReceive(orderId);
+        return ResultDTO.success();
+    }
+
+    @ApiOperation("删除订单")
+    @PostMapping("/delete")
+    public ResultDTO<PagedGridResult<MyOrderDTO>> delete(@RequestParam String orderId) {
+        centerOrderService.delete(orderId);
+        return ResultDTO.success();
+    }
 }

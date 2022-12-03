@@ -3,7 +3,9 @@ package com.imooc.dao.impl;
 import com.imooc.center.dto.MyOrderDTO;
 import com.imooc.dao.OrderDao;
 import com.imooc.enums.YesOrNo;
+import com.imooc.mapper.OrderStatusMapper;
 import com.imooc.mapper.OrdersMapper;
+import com.imooc.pojo.OrderStatus;
 import com.imooc.pojo.Orders;
 import org.n3r.idworker.Sid;
 import org.springframework.stereotype.Repository;
@@ -26,6 +28,8 @@ public class OrderDaoImpl implements OrderDao {
 
     @Resource
     private OrdersMapper ordersMapper;
+    @Resource
+    private OrderStatusMapper orderStatusMapper;
 
     @Override
     public void insert(Orders orders) {
@@ -45,5 +49,14 @@ public class OrderDaoImpl implements OrderDao {
     @Override
     public List<MyOrderDTO> listUserOrders(String userId, Integer orderStatus) {
         return ordersMapper.queryMyOrders(userId, orderStatus);
+    }
+
+    @Override
+    public void updateStatus(String orderId, int orderStatus) {
+        OrderStatus status = new OrderStatus();
+        status.setOrderId(orderId);
+        status.setOrderStatus(orderStatus);
+        status.setSuccessTime(new Date());
+        orderStatusMapper.updateByPrimaryKey(status);
     }
 }

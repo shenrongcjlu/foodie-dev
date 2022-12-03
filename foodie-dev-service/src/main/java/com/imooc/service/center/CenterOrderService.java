@@ -20,5 +20,15 @@ public interface CenterOrderService {
      */
     PagedGridResult<MyOrderDTO> queryMyOrders(Integer orderStatus, Integer pageNo, Integer pageSize);
 
+    /**
+     * 确认收货
+     * @param orderId
+     */
+    void confirmReceive(String orderId);
 
+    /**
+     * 删除订单
+     * @param orderId
+     */
+    void delete(String orderId);
 }

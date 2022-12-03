@@ -32,4 +32,11 @@ public interface OrderDao {
      * @return
      */
     List<MyOrderDTO> listUserOrders(String userId, Integer orderStatus);
+
+    /**
+     * 更新订单状态
+     * @param orderId
+     * @param orderStatus
+     */
+    void updateStatus(String orderId, int orderStatus);
 }

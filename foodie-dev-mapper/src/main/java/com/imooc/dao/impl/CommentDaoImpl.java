@@ -2,11 +2,12 @@ package com.imooc.dao.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.imooc.center.dto.response.CenterCommentRespDTO;
 import com.imooc.dao.CommentDao;
-import com.imooc.portal.dto.CommentDTO;
-import com.imooc.portal.dto.PageDTO;
 import com.imooc.mapper.ItemsCommentsMapper;
 import com.imooc.pojo.ItemsComments;
+import com.imooc.portal.dto.CommentDTO;
+import com.imooc.portal.dto.PageDTO;
 import com.imooc.utils.DesensitizationUtil;
 import com.imooc.utils.PagedGridResult;
 import org.n3r.idworker.Sid;
@@ -63,5 +64,10 @@ public class CommentDaoImpl implements CommentDao {
         itemsComments.setCreatedTime(new Date());
         itemsComments.setUpdatedTime(new Date());
         itemsCommentsMapper.insert(itemsComments);
+    }
+
+    @Override
+    public List<CenterCommentRespDTO> queryComments(String userId) {
+        return itemsCommentsMapper.queryComments(userId);
     }
 }

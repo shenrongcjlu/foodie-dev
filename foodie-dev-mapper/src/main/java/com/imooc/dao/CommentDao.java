@@ -1,8 +1,11 @@
 package com.imooc.dao;
 
+import com.imooc.center.dto.response.CenterCommentRespDTO;
 import com.imooc.pojo.ItemsComments;
 import com.imooc.portal.dto.PageDTO;
 import com.imooc.utils.PagedGridResult;
+
+import java.util.List;
 
 /**
  * 说明：
@@ -21,5 +24,12 @@ public interface CommentDao {
      * @param itemsComments
      */
     void insert(ItemsComments itemsComments);
+
+    /**
+     * 根据userId查询评价
+     * @param userId
+     * @return
+     */
+    List<CenterCommentRespDTO> queryComments(String userId);
 
 }

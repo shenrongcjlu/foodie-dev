@@ -30,4 +30,19 @@
     where
         ic.item_id = #{itemId} and ic.comment_level = #{level}
   </select>
+
+  <select id="queryComments" resultType="com.imooc.center.dto.response.CenterCommentRespDTO">
+    select
+        ic.id as commentId,
+        ic.content as content,
+        ic.created_time as createTime,
+        ic.item_id as itemId,
+        ic.item_name as itemName,
+        ic.sepc_name as specName,
+        ii.url as itemImg
+    from
+        items_comments ic left join items_img ii on ic.item_id = ii.item_id
+    where
+        ic.user_id = #{userId}
+  </select>
 </mapper>

@@ -1,7 +1,9 @@
 package com.imooc.service.center.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.imooc.LoginContext;
-import com.imooc.center.dto.CommentDTO;
+import com.imooc.center.dto.request.CenterCommentReqDTO;
+import com.imooc.center.dto.response.CenterCommentRespDTO;
 import com.imooc.dao.CommentDao;
 import com.imooc.dao.OrderDao;
 import com.imooc.dao.OrderItemDao;
@@ -12,6 +14,8 @@ import com.imooc.pojo.OrderItems;
 import com.imooc.pojo.OrderStatus;
 import com.imooc.pojo.Orders;
 import com.imooc.service.center.CommentService;
+import com.imooc.utils.PageUtil;
+import com.imooc.utils.PagedGridResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -46,17 +50,17 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     @Transactional
-    public void saveComments(String orderId, List<CommentDTO> params) {
+    public void saveComments(String orderId, List<CenterCommentReqDTO> params) {
         // 1. 保存评价
-        for (CommentDTO commentDTO : params) {
+        for (CenterCommentReqDTO centerCommentReqDTO : params) {
             ItemsComments itemsComments = new ItemsComments();
             itemsComments.setUserId(LoginContext.getUserId());
-            itemsComments.setItemId(commentDTO.getItemId());
-            itemsComments.setItemName(commentDTO.getItemName());
-            itemsComments.setItemSpecId(commentDTO.getItemSpecId());
-            itemsComments.setSepcName(commentDTO.getItemSpecName());
-            itemsComments.setCommentLevel(commentDTO.getCommentLevel());
-            itemsComments.setContent(commentDTO.getContent());
+            itemsComments.setItemId(centerCommentReqDTO.getItemId());
+            itemsComments.setItemName(centerCommentReqDTO.getItemName());
+            itemsComments.setItemSpecId(centerCommentReqDTO.getItemSpecId());
+            itemsComments.setSepcName(centerCommentReqDTO.getItemSpecName());
+            itemsComments.setCommentLevel(centerCommentReqDTO.getCommentLevel());
+            itemsComments.setContent(centerCommentReqDTO.getContent());
             commentDao.insert(itemsComments);
         }
         // 2. 修改订状态为已评价
@@ -69,5 +73,13 @@ public class CommentServiceImpl implements CommentService {
         orderStatus.setOrderId(orderId);
         orderStatus.setCommentTime(new Date());
         orderStatusDao.update(orderStatus);
+    }
+
+    @Override
+    public PagedGridResult<CenterCommentRespDTO> listCommentsByPage(Integer page, Integer pageSize) {
+        PageHelper.startPage(page, pageSize);
+        return PageUtil.getPageResult(
+                commentDao.queryComments(LoginContext.getUserId()),
+                page);
     }
 }

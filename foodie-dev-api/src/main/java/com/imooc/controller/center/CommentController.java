@@ -1,9 +1,11 @@
 package com.imooc.controller.center;
 
 import com.imooc.ResultDTO;
-import com.imooc.center.dto.CommentDTO;
+import com.imooc.center.dto.request.CenterCommentReqDTO;
+import com.imooc.center.dto.response.CenterCommentRespDTO;
 import com.imooc.pojo.OrderItems;
 import com.imooc.service.center.CommentService;
+import com.imooc.utils.PagedGridResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -36,8 +38,14 @@ public class CommentController {
 
     @ApiOperation("保存评价列表")
     @PostMapping("/saveList")
-    public ResultDTO<List<OrderItems>> saveList(@RequestParam String orderId, @RequestBody @NotEmpty List<CommentDTO> params) {
+    public ResultDTO<List<OrderItems>> saveList(@RequestParam String orderId, @RequestBody @NotEmpty List<CenterCommentReqDTO> params) {
         commentService.saveComments(orderId, params);
         return ResultDTO.success();
+    }
+
+    @ApiOperation("查询评价")
+    @PostMapping("/query")
+    public ResultDTO<PagedGridResult<CenterCommentRespDTO>> query(@RequestParam Integer page, @RequestParam Integer pageSize) {
+        return ResultDTO.success(commentService.listCommentsByPage(page, pageSize));
     }
 }

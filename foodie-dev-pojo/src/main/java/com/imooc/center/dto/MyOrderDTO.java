@@ -20,6 +20,7 @@ public class MyOrderDTO {
     private Integer realPayAmount;
     private Integer postAmount;
     private Integer orderStatus;
+    private Integer isComment;
 
     private List<MySubOrderItemDTO> subOrderItemList;
 }

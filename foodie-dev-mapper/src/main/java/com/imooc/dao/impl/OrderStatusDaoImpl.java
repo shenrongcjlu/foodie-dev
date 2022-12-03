@@ -43,6 +43,6 @@ public class OrderStatusDaoImpl implements OrderStatusDao {
     @Override
     public void update(OrderStatus orderStatus) {
         orderStatus.setCloseTime(new Date());
-        orderStatusMapper.updateByPrimaryKey(orderStatus);
+        orderStatusMapper.updateByPrimaryKeySelective(orderStatus);
     }
 }

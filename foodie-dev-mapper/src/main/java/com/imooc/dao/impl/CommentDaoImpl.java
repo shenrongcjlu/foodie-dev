@@ -9,11 +9,13 @@ import com.imooc.mapper.ItemsCommentsMapper;
 import com.imooc.pojo.ItemsComments;
 import com.imooc.utils.DesensitizationUtil;
 import com.imooc.utils.PagedGridResult;
+import org.n3r.idworker.Sid;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.CollectionUtils;
 import tk.mybatis.mapper.entity.Example;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -27,6 +29,8 @@ public class CommentDaoImpl implements CommentDao {
 
     @Resource
     private ItemsCommentsMapper itemsCommentsMapper;
+    @Resource
+    private Sid sid;
 
     @Override
     public Integer getCommentCount(String itemId, Integer level) {
@@ -51,5 +55,13 @@ public class CommentDaoImpl implements CommentDao {
         gridResult.setTotal(pageInfo.getPages());
         gridResult.setRecords(pageInfo.getTotal());
         return gridResult;
+    }
+
+    @Override
+    public void insert(ItemsComments itemsComments) {
+        itemsComments.setId(sid.nextShort());
+        itemsComments.setCreatedTime(new Date());
+        itemsComments.setUpdatedTime(new Date());
+        itemsCommentsMapper.insert(itemsComments);
     }
 }

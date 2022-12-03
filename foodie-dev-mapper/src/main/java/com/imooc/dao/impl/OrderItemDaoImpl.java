@@ -7,6 +7,7 @@ import org.n3r.idworker.Sid;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * 说明:
@@ -26,5 +27,12 @@ public class OrderItemDaoImpl implements OrderItemDao {
     public void insert(OrderItems orderItems) {
         orderItems.setId(sid.nextShort());
         orderItemsMapper.insert(orderItems);
+    }
+
+    @Override
+    public List<OrderItems> queryByOrderId(String orderId) {
+        OrderItems orderItems = new OrderItems();
+        orderItems.setOrderId(orderId);
+        return orderItemsMapper.select(orderItems);
     }
 }

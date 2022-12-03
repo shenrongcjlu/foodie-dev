@@ -2,6 +2,8 @@ package com.imooc.dao;
 
 import com.imooc.pojo.OrderItems;
 
+import java.util.List;
+
 /**
  * 说明:
  *
@@ -16,4 +18,10 @@ public interface OrderItemDao {
      */
     void insert(OrderItems orderItems);
 
+    /**
+     * 根据订单id查询
+     * @param orderId
+     * @return
+     */
+    List<OrderItems> queryByOrderId(String orderId);
 }

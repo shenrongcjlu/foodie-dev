@@ -3,6 +3,7 @@ package com.imooc.service.center.impl;
 import com.github.pagehelper.PageHelper;
 import com.imooc.LoginContext;
 import com.imooc.center.dto.MyOrderDTO;
+import com.imooc.center.dto.OrderStatusDTO;
 import com.imooc.center.dto.response.UserOrderCountsRespDTO;
 import com.imooc.dao.OrderDao;
 import com.imooc.dao.OrderStatusDao;
@@ -70,5 +71,13 @@ public class CenterOrderServiceImpl implements CenterOrderService {
         respDTO.setWaitReceiveCounts(orderDao.countOrderByStatus(LoginContext.getUserId(), OrderStatusEnum.WAIT_RECEIVE.getCode()));
         respDTO.setWaitCommentCounts(orderDao.countOrderByStatus(LoginContext.getUserId(), OrderStatusEnum.SUCCESS.getCode()));
         return respDTO;
+    }
+
+    @Override
+    public PagedGridResult<OrderStatusDTO> listUserOrderTrend(Integer page, Integer pageSize) {
+        PageHelper.startPage(page, pageSize);
+        return PageUtil.getPageResult(
+                orderDao.listUserOrderTrend(LoginContext.getUserId()),
+                page);
     }
 }

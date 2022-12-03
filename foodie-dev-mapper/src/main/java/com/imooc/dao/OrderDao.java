@@ -1,6 +1,7 @@
 package com.imooc.dao;
 
 import com.imooc.center.dto.MyOrderDTO;
+import com.imooc.center.dto.OrderStatusDTO;
 import com.imooc.pojo.Orders;
 import org.apache.ibatis.annotations.Param;
 
@@ -40,4 +41,10 @@ public interface OrderDao {
      */
     Integer countOrderByStatus(@Param("userId") String userId, @Param("status") Integer status);
 
+    /**
+     * 查询用户订单动向
+     * @param userId
+     * @return
+     */
+    List<OrderStatusDTO> listUserOrderTrend(String userId);
 }

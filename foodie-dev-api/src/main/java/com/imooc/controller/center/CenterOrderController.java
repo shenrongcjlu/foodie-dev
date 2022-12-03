@@ -2,6 +2,7 @@ package com.imooc.controller.center;
 
 import com.imooc.ResultDTO;
 import com.imooc.center.dto.MyOrderDTO;
+import com.imooc.center.dto.OrderStatusDTO;
 import com.imooc.center.dto.response.UserOrderCountsRespDTO;
 import com.imooc.service.center.CenterOrderService;
 import com.imooc.utils.PagedGridResult;
@@ -49,5 +50,11 @@ public class CenterOrderController {
     @PostMapping("/statusCounts")
     public ResultDTO<UserOrderCountsRespDTO> statusCounts() {
         return ResultDTO.success(centerOrderService.getUserOrderCounts());
+    }
+
+    @ApiOperation("查询订单动向")
+    @PostMapping("/trend")
+    public ResultDTO<PagedGridResult<OrderStatusDTO>> trend( @RequestParam Integer page, @RequestParam Integer pageSize) {
+        return ResultDTO.success(centerOrderService.listUserOrderTrend(page, pageSize));
     }
 }

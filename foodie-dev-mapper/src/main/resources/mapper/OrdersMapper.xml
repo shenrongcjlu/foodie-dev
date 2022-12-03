@@ -92,4 +92,23 @@
         and os.order_status = #{status}
         and o.is_comment = 0
   </select>
+
+  <select id="listUserOrderTrend" resultType="com.imooc.center.dto.OrderStatusDTO">
+      select
+        os.order_id as orderId,
+        os.order_status as orderStatus,
+        os.created_time as createTime,
+        os.pay_time as payTime,
+        os.deliver_time as deliverTime,
+        os.success_time as successTime,
+        os.close_time as closeTime,
+        os.comment_time as commentTime
+      from
+        orders o
+      left join order_status os on o.id = os.order_id
+      where
+        o.user_id = #{userId}
+        and os.order_status in (20, 30, 40)
+      order by os.order_id desc
+  </select>
 </mapper>

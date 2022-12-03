@@ -1,6 +1,7 @@
 package com.imooc.mapper;
 
 import com.imooc.center.dto.MyOrderDTO;
+import com.imooc.center.dto.OrderStatusDTO;
 import com.imooc.my.mapper.MyMapper;
 import com.imooc.pojo.Orders;
 import org.apache.ibatis.annotations.Mapper;
@@ -26,5 +27,9 @@ public interface OrdersMapper extends MyMapper<Orders> {
      */
     Integer countOrderByStatus(@Param("userId") String userId, @Param("status") Integer status);
 
-
+    /**
+     * 查询用户订单动向
+     * @param userId
+     */
+    List<OrderStatusDTO> listUserOrderTrend(String userId);
 }

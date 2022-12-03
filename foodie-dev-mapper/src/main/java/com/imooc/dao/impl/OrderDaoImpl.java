@@ -1,6 +1,7 @@
 package com.imooc.dao.impl;
 
 import com.imooc.center.dto.MyOrderDTO;
+import com.imooc.center.dto.OrderStatusDTO;
 import com.imooc.dao.OrderDao;
 import com.imooc.enums.YesOrNo;
 import com.imooc.mapper.OrderStatusMapper;
@@ -53,5 +54,10 @@ public class OrderDaoImpl implements OrderDao {
     @Override
     public Integer countOrderByStatus(String userId, Integer status) {
         return ordersMapper.countOrderByStatus(userId, status);
+    }
+
+    @Override
+    public List<OrderStatusDTO> listUserOrderTrend(String userId) {
+        return ordersMapper.listUserOrderTrend(userId);
     }
 }

@@ -1,6 +1,7 @@
 package com.imooc.service.center;
 
 import com.imooc.center.dto.MyOrderDTO;
+import com.imooc.center.dto.OrderStatusDTO;
 import com.imooc.center.dto.response.UserOrderCountsRespDTO;
 import com.imooc.utils.PagedGridResult;
 
@@ -38,4 +39,12 @@ public interface CenterOrderService {
      * @return
      */
     UserOrderCountsRespDTO getUserOrderCounts();
+
+    /**
+     * 查询用户订单动向
+     * @return
+     * @param page
+     * @param pageSize
+     */
+    PagedGridResult<OrderStatusDTO> listUserOrderTrend(Integer page, Integer pageSize);
 }

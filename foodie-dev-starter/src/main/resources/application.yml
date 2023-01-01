@@ -34,6 +34,11 @@ spring:
     multipart:
       max-file-size: 1MB
       max-request-size: 1MB
+  redis:
+    database: 0
+    host: 43.139.145.154
+    port: 6379
+    password: aa1234$
 ############################################################
 #
 # mybatis 配置

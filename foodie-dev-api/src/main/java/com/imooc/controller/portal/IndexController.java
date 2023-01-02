@@ -7,6 +7,7 @@ import com.imooc.pojo.Carousel;
 import com.imooc.pojo.Category;
 import com.imooc.service.portal.CarouselService;
 import com.imooc.service.portal.CategoryService;
+import com.imooc.utils.RedisOperator;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,6 +33,8 @@ public class IndexController {
     private CarouselService carouselService;
     @Resource
     private CategoryService categoryService;
+    @Resource
+    private RedisOperator redisOperator;
 
     @ApiOperation("轮播图")
     @GetMapping("/carousel")

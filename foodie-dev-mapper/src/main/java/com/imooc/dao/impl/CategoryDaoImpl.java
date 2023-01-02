@@ -5,6 +5,9 @@ import com.imooc.portal.dto.NewItemsDTO;
 import com.imooc.portal.dto.response.CategoryDTO;
 import com.imooc.mapper.CategoryMapper;
 import com.imooc.pojo.Category;
+import com.imooc.utils.JsonUtils;
+import com.imooc.utils.RedisOperator;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.entity.Example;
 
@@ -22,13 +25,22 @@ public class CategoryDaoImpl implements CategoryDao {
 
     @Resource
     private CategoryMapper categoryMapper;
+    @Resource
+    private RedisOperator redisOperator;
 
     @Override
     public List<Category> listRootCategory() {
-        Example example = new Example(Category.class);
-        Example.Criteria criteria = example.createCriteria();
-        criteria.andEqualTo("type", 1);
-        return categoryMapper.selectByExample(example);
+        String rootCategory = redisOperator.get("rootCategory");
+        if (StringUtils.isEmpty(rootCategory)) {
+            Example example = new Example(Category.class);
+            Example.Criteria criteria = example.createCriteria();
+            criteria.andEqualTo("type", 1);
+            List<Category> categories = categoryMapper.selectByExample(example);
+            redisOperator.set("rootCategory", JsonUtils.objectToJson(categories));
+            return categories;
+        } else {
+            return JsonUtils.jsonToList(rootCategory, Category.class);
+        }
     }
 
     @Override

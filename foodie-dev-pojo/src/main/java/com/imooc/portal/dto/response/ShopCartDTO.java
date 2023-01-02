@@ -16,6 +16,7 @@ public class ShopCartDTO {
     private String itemName;
     private String specId;
     private String specName;
+    private Integer buyCounts;
     private String priceDiscount;
     private String priceNormal;
 

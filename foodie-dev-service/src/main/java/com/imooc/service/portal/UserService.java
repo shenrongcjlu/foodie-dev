@@ -1,5 +1,6 @@
 package com.imooc.service.portal;
 
+import com.imooc.pojo.Users;
 import com.imooc.portal.dto.UserDTO;
 import com.imooc.portal.dto.request.UserCreateRequestDTO;
 
@@ -19,8 +20,9 @@ public interface UserService {
     /**
      * 创建用户
      * @param param
+     * @return
      */
-    void createUser(UserCreateRequestDTO param);
+    Users createUser(UserCreateRequestDTO param);
 
     /**
      * 根据用户名和密码

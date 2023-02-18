@@ -40,4 +40,9 @@ public class UserDTO {
      */
     private String mobile;
 
+    /**
+     * token
+     */
+    private String userUniqueToken;
+
 }

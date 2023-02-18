@@ -1,6 +1,8 @@
 package com.imooc.controller.portal;
 
+import com.imooc.Constants;
 import com.imooc.ResultDTO;
+import com.imooc.pojo.Users;
 import com.imooc.portal.dto.UserDTO;
 import com.imooc.portal.dto.request.UserCreateRequestDTO;
 import com.imooc.portal.dto.request.UserLoginRequestDTO;
@@ -8,10 +10,12 @@ import com.imooc.service.portal.UserService;
 import com.imooc.utils.CookieUtils;
 import com.imooc.utils.JsonUtils;
 import com.imooc.utils.MD5Utils;
+import com.imooc.utils.RedisOperator;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -19,6 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
+import java.util.UUID;
 
 /**
  * 说明
@@ -34,6 +39,8 @@ public class PassportController {
 
     @Resource
     private UserService userService;
+    @Resource
+    private RedisOperator redisOperator;
 
     @ApiOperation("查询用户名是存在")
     @GetMapping("/usernameIsExist")
@@ -43,14 +50,25 @@ public class PassportController {
 
     @ApiOperation("注册用户")
     @PostMapping("/regist")
-    public ResultDTO<Void> regist(@RequestBody @Valid UserCreateRequestDTO param) {
+    public ResultDTO<Void> regist(@RequestBody @Valid UserCreateRequestDTO param,
+                                  HttpServletRequest request,
+                                  HttpServletResponse response) {
         if (userService.isUserExist(param.getUsername())) {
             return ResultDTO.fail("用户名已经存在");
         }
         if (!StringUtils.equals(param.getPassword(), param.getConfirmPassword())) {
             return ResultDTO.fail("两次输入的密码不一致");
         }
-        userService.createUser(param);
+        Users user = userService.createUser(param);
+
+        String uniqueToken = UUID.randomUUID().toString().trim();
+        redisOperator.set(Constants.USER_TOKEN + ":" + user.getId(), uniqueToken);
+
+        UserDTO userDTO = new UserDTO();
+        BeanUtils.copyProperties(user, userDTO);
+        userDTO.setUserUniqueToken(uniqueToken);
+        CookieUtils.setCookie(request, response, "user", JsonUtils.objectToJson(userDTO), true);
+
         return ResultDTO.success();
     }
 
@@ -64,6 +82,11 @@ public class PassportController {
         if (userDTO == null) {
             return ResultDTO.fail("用户名或密码错误");
         }
+
+        String uniqueToken = UUID.randomUUID().toString().trim();
+        redisOperator.set(Constants.USER_TOKEN + ":" + userDTO.getId(), uniqueToken);
+        userDTO.setUserUniqueToken(uniqueToken);
+
         CookieUtils.setCookie(request, response, "user", JsonUtils.objectToJson(userDTO), true);
         return ResultDTO.success(userDTO);
     }

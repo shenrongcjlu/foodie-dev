@@ -1,5 +1,6 @@
 package com.imooc.controller.center;
 
+import com.imooc.Constants;
 import com.imooc.LoginContext;
 import com.imooc.ResultDTO;
 import com.imooc.center.dto.request.UserUpdateRequestDTO;
@@ -7,6 +8,7 @@ import com.imooc.portal.dto.UserDTO;
 import com.imooc.service.center.CenterUserService;
 import com.imooc.utils.CookieUtils;
 import com.imooc.utils.JsonUtils;
+import com.imooc.utils.RedisOperator;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -22,6 +24,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.UUID;
 
 /**
  * 说明:
@@ -42,11 +45,18 @@ public class CenterUserController {
 
     @Resource
     private CenterUserService centerUserService;
+    @Resource
+    private RedisOperator redisOperator;
 
     @ApiOperation("修改用户信息")
     @PostMapping("/update")
     public ResultDTO<UserDTO> update(@RequestBody UserUpdateRequestDTO param, HttpServletRequest request, HttpServletResponse response) {
         UserDTO user = centerUserService.updateUserInfo(param);
+
+        String uniqueToken = UUID.randomUUID().toString().trim();
+        redisOperator.set(Constants.USER_TOKEN + ":" + user.getId(), uniqueToken);
+        user.setUserUniqueToken(uniqueToken);
+
         CookieUtils.setCookie(request, response, "user", JsonUtils.objectToJson(user), true);
         return ResultDTO.success(user);
     }
@@ -72,6 +82,11 @@ public class CenterUserController {
         }
         String faceUrl = imageServerUrl + LoginContext.getUserId() + "/" + fileName + "?timestamp=" + System.currentTimeMillis();
         UserDTO userDTO = centerUserService.updateUserFace(faceUrl);
+
+        String uniqueToken = UUID.randomUUID().toString().trim();
+        redisOperator.set(Constants.USER_TOKEN + ":" + userDTO.getId(), uniqueToken);
+        userDTO.setUserUniqueToken(uniqueToken);
+
         // 清除缓存
         CookieUtils.setCookie(request, response, "user", JsonUtils.objectToJson(userDTO), true);
         return ResultDTO.success(userDTO);

@@ -97,6 +97,8 @@ public class PassportController {
             @RequestParam String userId,
             HttpServletRequest request,
             HttpServletResponse response) {
+        // 清除token信息
+        redisOperator.del(Constants.USER_TOKEN + ":" + userId);
         CookieUtils.deleteCookie(request, response, "user");
         return ResultDTO.success();
     }

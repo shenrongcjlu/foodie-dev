@@ -32,10 +32,20 @@ public class WebConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new RequestInterceptor()).addPathPatterns("/**");
         registry.addInterceptor(new UserTokenInterceptor())
-                .addPathPatterns("/**")
-                .excludePathPatterns("/passport/register")
-                .excludePathPatterns("/passport/logout")
-                .excludePathPatterns("/passport/login");
+                .addPathPatterns("/shopcart/add")
+                .addPathPatterns("/shopcart/del")
+                .addPathPatterns("/address/list")
+                .addPathPatterns("/address/add")
+                .addPathPatterns("/address/update")
+                .addPathPatterns("/address/setDefalut")
+                .addPathPatterns("/address/delete")
+                .addPathPatterns("/orders/*")
+                .addPathPatterns("/center/*")
+                .addPathPatterns("/userInfo/*")
+                .addPathPatterns("/myorders/*")
+                .addPathPatterns("/mycomments/*")
+                .excludePathPatterns("/myorders/deliver")
+                .excludePathPatterns("/orders/notifyMerchantOrderPaid");
     }
 
     @Override

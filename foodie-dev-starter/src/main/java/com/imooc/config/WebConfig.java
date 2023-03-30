@@ -2,6 +2,7 @@ package com.imooc.config;
 
 import com.imooc.factory.IntegerEnumConvertFactory;
 import com.imooc.interceptor.RequestInterceptor;
+import com.imooc.interceptor.UserTokenInterceptor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
@@ -30,6 +31,11 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new RequestInterceptor()).addPathPatterns("/**");
+        registry.addInterceptor(new UserTokenInterceptor())
+                .addPathPatterns("/**")
+                .excludePathPatterns("/passport/register")
+                .excludePathPatterns("/passport/logout")
+                .excludePathPatterns("/passport/login");
     }
 
     @Override

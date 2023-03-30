@@ -39,6 +39,8 @@ spring:
     host: 43.139.145.154
     port: 6379
     password: aa1234$
+  session:
+    store-type: redis
 ############################################################
 #
 # mybatis 配置

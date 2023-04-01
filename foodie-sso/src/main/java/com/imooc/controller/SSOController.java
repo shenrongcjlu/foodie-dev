@@ -1,6 +1,7 @@
 package com.imooc.controller;
 
 import com.imooc.Constants;
+import com.imooc.ResultDTO;
 import com.imooc.portal.dto.UserDTO;
 import com.imooc.service.portal.UserService;
 import com.imooc.utils.JsonUtils;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
@@ -44,6 +46,7 @@ public class SSOController {
     @PostMapping("doLogin")
     public String doLogin(String username,
                           String password,
+                          String returnUrl,
                           Model model,
                           HttpServletRequest request,
                           HttpServletResponse response) {
@@ -72,9 +75,57 @@ public class SSOController {
 
         // 生成临时ticket
         String userTmpTicket = UUID.randomUUID().toString().trim();
-        redisOperator.set(Constants.USER_TMP_TICKET + ":" + userTmpTicket, MD5Utils.getMD5Str(userTicket), 600);
+        redisOperator.set(Constants.USER_TMP_TICKET + ":" + userTmpTicket, MD5Utils.getMD5Str(userTmpTicket), 600);
 
-        return "login";
+        return "redirect:" + returnUrl + "?tmpTicket=" + userTmpTicket + "&userTicket=" + userTicket;
+//        return "login";
+    }
+
+    @PostMapping("verifyTmpTicket")
+    @ResponseBody
+    public ResultDTO verifyTmpTicker(String tmpTicket,
+                                     String userTicket,
+                                     HttpServletRequest request,
+                                     HttpServletResponse response) {
+        String key = Constants.USER_TMP_TICKET + ":" + tmpTicket;
+        String redisTmpTicket = redisOperator.get(key);
+        if (StringUtils.isBlank(redisTmpTicket)) {
+            return ResultDTO.fail("用户票据不存在");
+        }
+
+        if (!StringUtils.equals(redisTmpTicket, MD5Utils.getMD5Str(tmpTicket))) {
+            return ResultDTO.fail("用户票据异常");
+        }
+
+        // 票据验证通过后删除
+        redisOperator.del(key);
+
+        // 从cookie中获取到userToken
+        if (StringUtils.isBlank(userTicket)) {
+            return ResultDTO.fail("用户票据异常");
+        }
+
+        String userId = redisOperator.get(Constants.USER_TICKET + ":" + userTicket);
+        if (StringUtils.isBlank(userId)) {
+            return ResultDTO.fail("用户票据异常");
+        }
+
+        String userInfo = redisOperator.get(Constants.USER_TOKEN + ":" + userId);
+        if (StringUtils.isBlank(userId)) {
+            return ResultDTO.fail("用户票据异常");
+        }
+
+        return ResultDTO.success(JsonUtils.jsonToPojo(userInfo, UserDTO.class));
+    }
+
+    private String getUserTicketFromCookie(HttpServletRequest request, String key) {
+        Cookie[] cookies = request.getCookies();
+        for (Cookie cookie : cookies) {
+            if (StringUtils.equals(cookie.getName(), key)) {
+                return cookie.getValue();
+            }
+        }
+        return null;
     }
 
     private void addCookie(HttpServletResponse response, String userTicket) {

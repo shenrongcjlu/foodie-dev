@@ -6,8 +6,6 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
-import java.util.Arrays;
-
 /**
  * 说明： 跨域配置
  *
@@ -21,11 +19,12 @@ public class CorsConfig {
     public CorsFilter corsFilter() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
         corsConfiguration.addAllowedOrigin("http://localhost:8080");
-        corsConfiguration.addAllowedOrigin("http://www.mtv.com/:8080");
-        corsConfiguration.addAllowedOrigin("http://www.sso.com:8080");
+        corsConfiguration.addAllowedOrigin("http://www.mtv.com:8080");
+        corsConfiguration.addAllowedOrigin("http://www.mtv.com");
+        corsConfiguration.addAllowedOrigin("http://www.music.com");
+        corsConfiguration.addAllowedOrigin("http://www.music.com:8080");
         corsConfiguration.addAllowedHeader("*");
         corsConfiguration.addAllowedMethod("*");
-        corsConfiguration.setAllowedOrigins(Arrays.asList("*"));
         corsConfiguration.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource configurationSource = new UrlBasedCorsConfigurationSource();

@@ -1,15 +1,19 @@
 package com.imooc;
 
 import com.imooc.pojo.Stu;
+import org.elasticsearch.action.index.IndexRequest;
+import org.elasticsearch.action.index.IndexResponse;
+import org.elasticsearch.client.RequestOptions;
+import org.elasticsearch.client.RestHighLevelClient;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
-import org.springframework.data.elasticsearch.core.query.IndexQuery;
-import org.springframework.data.elasticsearch.core.query.IndexQueryBuilder;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 说明:
@@ -22,17 +26,26 @@ import javax.annotation.Resource;
 public class EsTest {
 
     @Resource
-    private ElasticsearchTemplate elasticsearchTemplate;
+    RestHighLevelClient highLevelClient;
+
 
     @Test
-    public void testAddIndex() {
+    public void testAddIndex() throws IOException {
         Stu stu = new Stu();
         stu.setAge(18);
         stu.setName("shenrong");
         stu.setId(1L);
 
-        IndexQuery build = new IndexQueryBuilder().withObject(stu).build();
-        elasticsearchTemplate.index(build);
+        Map<String, String> map = new HashMap<>();
+        map.put("name", "shenrong");
+
+
+        IndexRequest request = new IndexRequest("spring-data")
+                .id("afsdasdf")
+                .source(map)
+                ;
+
+        IndexResponse response = highLevelClient.index(request, RequestOptions.DEFAULT);
     }
 
 }

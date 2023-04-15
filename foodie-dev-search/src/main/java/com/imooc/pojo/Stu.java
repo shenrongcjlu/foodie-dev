@@ -2,7 +2,6 @@ package com.imooc.pojo;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 
 /**
@@ -12,16 +11,15 @@ import org.springframework.data.elasticsearch.annotations.Field;
  * @date 2023/4/13 23:39
  */
 @Data
-@Document(indexName = "stu")
 public class Stu {
 
     @Id
     private Long id;
 
-    @Field(store = true)
+    @Field
     private String name;
 
-    @Field(store = true)
+    @Field
     private Integer age;
 
 }

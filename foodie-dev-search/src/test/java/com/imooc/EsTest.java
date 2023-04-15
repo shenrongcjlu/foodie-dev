@@ -1,13 +1,13 @@
 package com.imooc;
 
 import com.imooc.pojo.Stu;
-import org.elasticsearch.action.index.IndexRequest;
-import org.elasticsearch.action.index.IndexResponse;
-import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
+import org.springframework.data.elasticsearch.core.query.IndexQuery;
+import org.springframework.data.elasticsearch.core.query.IndexQueryBuilder;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
@@ -25,9 +25,9 @@ import java.util.Map;
 @SpringBootTest(classes = Application.class)
 public class EsTest {
 
-    @Resource
-    RestHighLevelClient highLevelClient;
 
+    @Resource
+    private ElasticsearchOperations elasticsearchOperations;
 
     @Test
     public void testAddIndex() throws IOException {
@@ -40,12 +40,10 @@ public class EsTest {
         map.put("name", "shenrong");
 
 
-        IndexRequest request = new IndexRequest("spring-data")
-                .id("afsdasdf")
-                .source(map)
-                ;
-
-        IndexResponse response = highLevelClient.index(request, RequestOptions.DEFAULT);
+        IndexQuery indexQuery = new IndexQueryBuilder()
+                .withObject(stu)
+                .build();
+        String documentId = elasticsearchOperations.save(stu);
     }
 
 }
